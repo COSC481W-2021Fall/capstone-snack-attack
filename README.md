@@ -1,4 +1,3 @@
 # capstone-grouptwo
-Project name:
 
 
