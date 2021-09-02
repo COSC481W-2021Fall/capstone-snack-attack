@@ -1,6 +1,4 @@
-# capstone-grouptwo
-
-Team name: Snack Attack
+# Group Two Team name: Snack Attack
 
 Project Name: Cross Amazon
 
