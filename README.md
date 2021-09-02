@@ -21,3 +21,7 @@ This is my last semester at EMU as a second bachelor's student. I was previously
 ##### Ke Shao - Team Member
 
 I am a graduate student at Eastern Michigan Universiy majoring in Computer Science and plan to graduate in the 2022. I like traveling, music and taking care of my babies.
+
+##### Sandra Sabatini - Team Member
+
+This is my last semester at EMU, majoring in Computer science, and mathematics. Married to a good guy, involved in my church, and i enjoy gardening and working out. 
