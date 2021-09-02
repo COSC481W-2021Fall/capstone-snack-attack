@@ -17,3 +17,7 @@ Last semester at EMU, husband of a perfect wife, father of two children（One wa
 ##### Alex London - Deputy Team Lead
 
 This is my last semester at EMU as a second bachelor's student. I was previously an intern and associate software engineer at Learning A-Z in Ann Arbor. I like video games, board games, camping, and hiking.
+
+##### Ke Shao - Team Member
+
+I am a graduate student at Eastern Michigan Universiy majoring in Computer Science and plan to graduate in the 2022. I like traveling, music and taking care of my babies.
