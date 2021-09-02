@@ -25,3 +25,7 @@ I am a graduate student at Eastern Michigan Universiy majoring in Computer Scien
 ##### Sandra Sabatini - Team Member
 
 This is my last semester at EMU, majoring in Computer science, and mathematics. Married to a good guy, involved in my church, and i enjoy gardening and working out. 
+
+##### Kulwinder Kaur - Team Member
+
+This is my second last semester at EMU.I work in Healthcare DME as a billing assistant. I like play Tennis, Travelling and spend time with my family.
