@@ -29,3 +29,6 @@ This is my last semester at EMU, majoring in Computer science, and mathematics. 
 ##### Kulwinder Kaur - Team Member
 
 This is my second last semester at EMU.I work in Healthcare DME as a billing assistant. I like play Tennis, Travelling and spend time with my family.
+
+#### I am trying something new.
+
