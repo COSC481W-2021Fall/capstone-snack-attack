@@ -66,4 +66,5 @@ Once you have done the above procedure, you should create a pull request in GitH
 The title of the pull request should be a brief description of the purpose of the pull request. For example: Improved main page layout.
 The body of the pull request should have a detailed summary of the changes and why they were made, much like the commit messages discussed above. The purpose of this comment is to help your code reviewer understand your changes, so explain anything that may be difficult or confusing to understand.
 Assign a team member to review the pull request.
+Add any relevant labels.
 Link the relevant issue case. This helps the reviewer know what issue case this pull request is resolving, and also allows the issue to be automatically resolved once the pull request is merged.
