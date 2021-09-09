@@ -53,6 +53,7 @@ GitHub Issue #: The bottom line should have the Issue # so that everyone can kno
 ### Pull Request Guideline
 
 Your working branch should be synced with main before submitting a pull request. Follow these steps to do that:
+
     1. Git pull. This makes sure that main is up to date.
     2. Git merge main. Do this while in the working branch. This updates your working branch with any changes in main. At this point there may be conflicts.
         - If there are conflicts:
