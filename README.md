@@ -30,7 +30,7 @@ This is my last semester at EMU, majoring in Computer science, and mathematics. 
 
 This is my second last semester at EMU.I work in Healthcare DME as a billing assistant. I like play Tennis, Travelling and spend time with my family.
 
-### Commit Guidelines
+### Commit Message Guideline
 
 Commits should be structured as shown below.
 
@@ -49,3 +49,21 @@ If there is something unusual or confusing in your changes, clarify why it was d
 Your commit message is an opportunity to help your teammates and yourself understand your changes.
 
 GitHub Issue #: The bottom line should have the Issue # so that everyone can know what issue this commit is associated with.
+
+### Pull Request Guideline
+
+Your working branch should be synced with main before submitting a pull request. Follow these steps to do that:
+    1. Git pull. This makes sure that main is up to date.
+    2. Git merge main. Do this while in the working branch. This updates your working branch with any changes in main. At this point there may be conflicts.
+        - If there are conflicts:
+        1. Resolve conflicts in necessary files.
+        2. Git add & git commit. This stages and commits the changes from the conflict resolution.
+    3. Git push origin workingBranchName. This pushes any changes in the local working branch to the remote working branch.
+
+We do this because it allows us to resolve merge conflicts before creating the pull request. This has the benefit of resolving the conflicts early, before the working branch is being merged to main.
+
+Once you have done the above procedure, you should create a pull request in GitHub.
+The title of the pull request should be a brief description of the purpose of the pull request. For example: Improved main page layout.
+The body of the pull request should have a detailed summary of the changes and why they were made, much like the commit messages discussed above. The purpose of this comment is to help your code reviewer understand your changes, so explain anything that may be difficult or confusing to understand.
+Assign a team member to review the pull request.
+Link the relevant issue case. This helps the reviewer know what issue case this pull request is resolving, and also allows the issue to be automatically resolved once the pull request is merged.
