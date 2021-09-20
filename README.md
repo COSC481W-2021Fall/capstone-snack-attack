@@ -69,3 +69,20 @@ The body of the pull request should have a detailed summary of the changes and w
 Assign a team member to review the pull request.
 Add any relevant labels.
 Link the relevant issue case. This helps the reviewer know what issue case this pull request is resolving, and also allows the issue to be automatically resolved once the pull request is merged.
+
+### Code Review Checklist
+    1. Fit for Purpose
+        Code may work, but does it work in the way that you expects?
+    2. Notice What's Missing
+        For example, it’s important to think through edge cases, unexpected inputs, and error handling scenarios that the code’s author may not have considered.  What happens when the user hits the submit button twice in rapid succession? What happens when the user’s browser isn’t supported?
+    3. Readability
+        Readability in software means that the code is easy to understand. If not, have you made any comments there to help your teammates to understand.
+    4. Maintainability
+        Avoiding hard-coded configuration. 
+    5. Testing
+        Check that tests are present and well documented for all common functionality. 
+        Make sure that tests are well isolated, so you can find the problem quickly if a test fails. 
+    6. Performance
+        Is the project as performant as it could be, or are these obvious optimizations that might improve performance? 
+
+    
