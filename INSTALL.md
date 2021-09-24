@@ -59,6 +59,10 @@ Sleek, intuitive, and powerful front-end framework for faster and easier web dev
 Axios is a simple promise based HTTP client for the browser and node.js. Axios provides a simple to use library in a small package with a very extensible interface.
 `$ npm install axios`
 
+### react-router-dom
+DOM bindings for React Router.
+`$ npm install --save react-router-dom`
+
 ## Install dev depencies
 
 ### nodemon
