@@ -24,7 +24,7 @@ export default class SignupDAO {
             return user
         } catch (e) {
             console.error(e)
-            return users
+            return user
         }
     }
 
@@ -34,7 +34,7 @@ export default class SignupDAO {
             return user
         } catch (e) {
             console.error(e)
-            return users
+            return user
         }
     }
 
