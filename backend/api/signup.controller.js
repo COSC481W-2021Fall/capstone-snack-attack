@@ -1,11 +1,11 @@
 import SignupDAO from "../dao/signupDAO.js"
 
 export default class SignupController {
-    static async verifySignup(req, res, next) {
+    static async verifyAdminSignup(req, res, next) {
         try {
             const username = req.body.username
             const password = req.body.password
-            let usernameUnique = await SignupController.usernameIsUnique(username)
+            let usernameUnique = await SignupController.usernameIsUnique(username, true)
             let passwordValid = SignupController.passwordIsValid(password)
 
             if (!usernameUnique) {
@@ -24,13 +24,50 @@ export default class SignupController {
         }
     }
 
-    static async usernameIsUnique(username) {
+    static async verifyCustomerSignup(req, res, next) {
         try {
-            let user = await SignupDAO.checkAdminForUsername(username)
-            if (user) {
-                return false
+            const customerInfo = {
+                username: req.body.username,
+                password: req.body.password,
+                address: req.body.address,
+                first_name: req.body.first_name,
+                last_name: req.body.last_name,
+                telephone: req.body.telephone,
+                city: req.body.city,
+                state: req.body.state,
+                zip_code: req.body.zip_code
+            }
+            let usernameUnique = await SignupController.usernameIsUnique(customerInfo.username, false)
+            let passwordValid = SignupController.passwordIsValid(customerInfo.password)
+
+            if (!usernameUnique) {
+                res.json({ error: "username is not unique" })
+            }
+            else if (!passwordValid) {
+                res.json({ error: "password is not valid" })
             }
             else {
+                let signupResponse = await SignupDAO.createCustomerAccount(customerInfo)
+                res.json({ signupResponse })
+            }
+        } catch (e) {
+            console.error(e)
+            res.status(500).json({ error: e })
+        }
+    }
+
+    static async usernameIsUnique(username, isAdmin) {
+        try {
+            let user
+            if (isAdmin) {
+                user = await SignupDAO.checkAdminForUsername(username)
+            } else {
+                user = await SignupDAO.checkCustomerForUsername(username)
+            }
+            
+            if (user) {
+                return false
+            } else {
                 return true
             }
         } catch (e) {
