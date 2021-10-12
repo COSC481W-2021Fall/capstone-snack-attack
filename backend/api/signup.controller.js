@@ -1,10 +1,11 @@
-import SignupDAO from "../dao/signupDAO.js"
+import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
+import PasswordEncryption from "../passwordEncryption.js"
 
 export default class SignupController {
     static async verifyAdminSignup(req, res, next) {
         try {
             const username = req.body.username
-            const password = req.body.password
+            let password = req.body.password
             let usernameUnique = await SignupController.usernameIsUnique(username, true)
             let passwordValid = SignupController.passwordIsValid(password)
 
@@ -15,7 +16,8 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                let signupResponse = await SignupDAO.createAdminAccount(username, password)
+                password = PasswordEncryption.encryptPassword(password)
+                let signupResponse = await UserAuthenticationDAO.createAdminAccount(username, password)
                 res.json({ signupResponse })
             }
         } catch (e) {
@@ -26,7 +28,7 @@ export default class SignupController {
 
     static async verifyCustomerSignup(req, res, next) {
         try {
-            const customerInfo = {
+            let customerInfo = {
                 username: req.body.username,
                 password: req.body.password,
                 address: req.body.address,
@@ -47,7 +49,8 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                let signupResponse = await SignupDAO.createCustomerAccount(customerInfo)
+                customerInfo.password = PasswordEncryption.encryptPassword(customerInfo.password)
+                let signupResponse = await UserAuthenticationDAO.createCustomerAccount(customerInfo)
                 res.json({ signupResponse })
             }
         } catch (e) {
@@ -60,9 +63,9 @@ export default class SignupController {
         try {
             let user
             if (isAdmin) {
-                user = await SignupDAO.checkAdminForUsername(username)
+                user = await UserAuthenticationDAO.checkAdminForUsername(username)
             } else {
-                user = await SignupDAO.checkCustomerForUsername(username)
+                user = await UserAuthenticationDAO.checkCustomerForUsername(username)
             }
             
             if (user) {
