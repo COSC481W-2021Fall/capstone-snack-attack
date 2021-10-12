@@ -1,4 +1,5 @@
-export default function validateInfo(values) {
+
+export default function ValidateInfo(values) {
     let errors = {};
   
     // if (!values.username.trim()) {
@@ -12,7 +13,9 @@ export default function validateInfo(values) {
       errors.email = 'Email required';
     } else if (!/\S+@\S+\.\S+/.test(values.email)) {
       errors.email = 'Email address is invalid';
-    }
+    } 
+
+
 
     if (!values.password) {
       errors.password = 'Password is required';
@@ -28,5 +31,8 @@ export default function validateInfo(values) {
     } else if (values.password2 !== values.password) {
       errors.password2 = 'Passwords do not match';
     }
+    
+
     return errors;
+
   }

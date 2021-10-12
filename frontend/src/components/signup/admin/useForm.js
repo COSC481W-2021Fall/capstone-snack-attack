@@ -1,4 +1,7 @@
 import { useState, useEffect } from 'react';
+import UserActions from "../../../services/userAction";
+
+
 
 const useForm = (callback, validate) => {
   const [values, setValues] = useState({
@@ -9,7 +12,7 @@ const useForm = (callback, validate) => {
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  
   const handleChange = e => {
     const { name, value } = e.target;
     setValues({
@@ -19,18 +22,46 @@ const useForm = (callback, validate) => {
   };
 
   const handleSubmit = e => {
+    
     e.preventDefault();
-
+    
     setErrors(validate(values));
     setIsSubmitting(true);
+   
+    
+    UserActions.uniqueValid({username: values.email}).then(response => {
+      console.log(response.data.message);
+    }).catch((e) => {if(e.response.status === 401) {
+      console.log(e);
+      window.alert("This username already exists. Please try another one")
+    } else {
+      console.log(e);
+      window.alert("Can not sign up")
+    }
+   });
   };
 
+  
   useEffect(
     () => {
       if (Object.keys(errors).length === 0 && isSubmitting) {
         callback();
+
+        UserActions.createAdminAccount({username: values.email, password: values.password}).then(response => {
+          console.log(response.data.message);
+        }).catch((e) => {if(e.response.status === 401) {
+          console.log(e);
+          window.alert("This username already exists. Please try another one")
+        } else {
+          console.log(e);
+          window.alert("Can not sign up")
+        }
+       })
+
+
       }
     },
+    // eslint-disable-next-line
     [errors]
   );
 

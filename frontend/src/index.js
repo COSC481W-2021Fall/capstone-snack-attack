@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import AdminSignupApp from './components/signup/admin/AdminSignupApp';
+import App from './App';
 
 ReactDOM.render(
   <React.StrictMode>
-    <AdminSignupApp />
+    <App />
   </React.StrictMode>,
   document.getElementById('root')
 );
