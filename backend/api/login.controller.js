@@ -1,10 +1,11 @@
 import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
+import PasswordEncryption from "../passwordEncryption.js"
 
 export default class LoginController {
     static async verifyAdminLogin(req, res, next) {
         try {
             const username = req.body.username
-            const password = req.body.password
+            const password = PasswordEncryption.encryptPassword(req.body.password)
 
             if (await LoginController.usernameAndPasswordMatch(username, password, true)) {
                 res.json({ message: "login valid" })
@@ -21,7 +22,7 @@ export default class LoginController {
     static async verifyCustomerLogin(req, res, next) {
         try {
             const username = req.body.username
-            const password = req.body.password
+            const password = PasswordEncryption.encryptPassword(req.body.password)
 
             if (await LoginController.usernameAndPasswordMatch(username, password, false)) {
                 res.json({ message: "login valid" })
