@@ -1,4 +1,4 @@
-import SignupDAO from "../dao/signupDAO.js"
+import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
 
 export default class SignupController {
     static async verifyAdminSignup(req, res, next) {
@@ -15,7 +15,7 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                let signupResponse = await SignupDAO.createAdminAccount(username, password)
+                let signupResponse = await UserAuthenticationDAO.createAdminAccount(username, password)
                 res.json({ signupResponse })
             }
         } catch (e) {
@@ -47,7 +47,7 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                let signupResponse = await SignupDAO.createCustomerAccount(customerInfo)
+                let signupResponse = await UserAuthenticationDAO.createCustomerAccount(customerInfo)
                 res.json({ signupResponse })
             }
         } catch (e) {
@@ -60,9 +60,9 @@ export default class SignupController {
         try {
             let user
             if (isAdmin) {
-                user = await SignupDAO.checkAdminForUsername(username)
+                user = await UserAuthenticationDAO.checkAdminForUsername(username)
             } else {
-                user = await SignupDAO.checkCustomerForUsername(username)
+                user = await UserAuthenticationDAO.checkCustomerForUsername(username)
             }
             
             if (user) {
