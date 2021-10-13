@@ -1,11 +1,10 @@
 import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
-import PasswordEncryption from "../passwordEncryption.js"
 
 export default class SignupController {
     static async verifyAdminSignup(req, res, next) {
         try {
             const username = req.body.username
-            let password = req.body.password
+            const password = req.body.password
             let usernameUnique = await SignupController.usernameIsUnique(username, true)
             let passwordValid = SignupController.passwordIsValid(password)
 
@@ -16,7 +15,6 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                password = PasswordEncryption.encryptPassword(password)
                 let signupResponse = await UserAuthenticationDAO.createAdminAccount(username, password)
                 res.json({ signupResponse })
             }
@@ -28,7 +26,7 @@ export default class SignupController {
 
     static async verifyCustomerSignup(req, res, next) {
         try {
-            let customerInfo = {
+            const customerInfo = {
                 username: req.body.username,
                 password: req.body.password,
                 address: req.body.address,
@@ -49,7 +47,6 @@ export default class SignupController {
                 res.json({ error: "password is not valid" })
             }
             else {
-                customerInfo.password = PasswordEncryption.encryptPassword(customerInfo.password)
                 let signupResponse = await UserAuthenticationDAO.createCustomerAccount(customerInfo)
                 res.json({ signupResponse })
             }
