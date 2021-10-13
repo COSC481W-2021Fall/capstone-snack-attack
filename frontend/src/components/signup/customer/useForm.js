@@ -9,7 +9,7 @@ const useForm = (callback, validate) => {
     email: '',
     password: '',
     password2: '',
-    isAdmin: 'yes'
+    isAdmin: 'no'
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,7 +40,8 @@ const useForm = (callback, validate) => {
       window.alert("Can not sign up")
     }
    });
-   
+
+
   };
 
   
@@ -49,7 +50,7 @@ const useForm = (callback, validate) => {
       if (Object.keys(errors).length === 0 && isSubmitting) {
         callback();
 
-        UserActions.createAdminAccount({username: values.email, password: values.password}).then(response => {
+        UserActions.createCustomerAccount({username: values.email, password: values.password}).then(response => {
           console.log(response.data.message);
         }).catch((e) => {if(e.response.status === 401) {
           console.log(e);
