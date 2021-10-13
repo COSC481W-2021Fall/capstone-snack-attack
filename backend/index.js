@@ -1,7 +1,7 @@
 import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
-import signupDAO from "./dao/signupDAO.js";
+import UserAuthenticationDAO from "./dao/userAuthenticationDAO.js";
 import productDAO from "./dao/productDAO.js";
 
 dotenv.config();
@@ -19,7 +19,7 @@ MongoClient.connect(process.env.ESHOPLOGINCREDENTIALS_DB_URI, {
     process.exit(1);
   })
   .then(async (client) => {
-    await signupDAO.injectDB(client);
+    await UserAuthenticationDAO.injectDB(client);
     await productDAO.injectDB(client);
     app.listen(port, () => {
       console.log(`listening on port ${port}`);

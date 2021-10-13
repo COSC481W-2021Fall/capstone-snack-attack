@@ -1,7 +1,7 @@
 import ProductDAO from "../dao/productDAO.js"
-import SignupDAO from "../dao/signupDAO.js"
+import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
 
-export default class SignupController {
+export default class ProductController {
     static async verifyAddProduct(req, res, next) {
         const productInfo = {
             title: req.body.title,
@@ -13,10 +13,10 @@ export default class SignupController {
         }
         const username = req.body.username
 
-        if (!await SignupController.userIsAdmin(username)) {
+        if (!await ProductController.userIsAdmin(username)) {
             res.json({ error: "user is not a store admin" })
         }
-        else if (await SignupController.productIsDuplicate(productInfo)) {
+        else if (await ProductController.productIsDuplicate(productInfo)) {
             res.json({ error: "product is a duplicate" })
         }
         else if (productInfo.quantity < 1) {
@@ -30,7 +30,7 @@ export default class SignupController {
 
     static async userIsAdmin(username) {
         try {
-            let user = await SignupDAO.checkAdminForUsername(username)
+            let user = await UserAuthenticationDAO.checkAdminForUsername(username)
             
             if (user) {
                 return true
