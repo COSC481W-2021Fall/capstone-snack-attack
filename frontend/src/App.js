@@ -4,6 +4,10 @@ import { UserList } from './components/Users';
 import restProvider from 'ra-data-simple-rest';
 import { Switch, Route, Link, BrowserRouter} from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useSelector } from 'react-redux';
+import SigninScreen from './screen/SigninScreen';
+import HomeScreen from './screen/HomeScreen';
+import ProductScreen from './screen/ProductScreen';
 
 //import Login from "./";
 
@@ -49,7 +53,4 @@ function App() {
   );
 }
 
-
 export default App;
-
-    
