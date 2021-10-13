@@ -3,7 +3,7 @@ const ObjectId = mongodb.ObjectID
 let admin
 let customer
 
-export default class SignupDAO {
+export default class UserAuthenticationDAO {
     static async injectDB(conn) {
         if (admin && customer) {
             return
@@ -24,7 +24,7 @@ export default class SignupDAO {
             return user
         } catch (e) {
             console.error(e)
-            return users
+            return user
         }
     }
 
@@ -34,7 +34,7 @@ export default class SignupDAO {
             return user
         } catch (e) {
             console.error(e)
-            return users
+            return user
         }
     }
 
