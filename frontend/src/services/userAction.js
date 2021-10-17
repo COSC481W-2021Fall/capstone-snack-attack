@@ -1,16 +1,17 @@
 import http from "../http-common";
 
 class UserActions {
-    createAdminAccount(data) {
-        return http.post("/signup/admin", data);
-    }
 
     uniqueValid(data) {
-        return http.post("/signup/validuser", data);
+        return http.post("/signup/isunique", data);
     }
 
-    createCustomerAccount(data) {
-        return http.post("/signup/customer", data);
+    createAccount(data) {
+        return http.post("/signup", data);
+    }
+
+    verifyLogin(data) {
+        return http.post("/login", data);
     }
 
 

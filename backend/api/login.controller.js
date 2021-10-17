@@ -1,60 +1,46 @@
 import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
 
 export default class LoginController {
-    static async verifyAdminLogin(req, res, next) {
+
+
+    static async verifyLogin(req, res, next) {
         try {
             const username = req.body.username
             const password = req.body.password
+            const userrole = req.body.userrole
+            let user
 
-            if (await LoginController.usernameAndPasswordMatch(username, password, true)) {
-                res.json({ message: "login valid" })
-            } 
-            else {
-                res.json({ error: "username and password do not match" })
-            }
-        } catch (e) {
-            console.error(e)
-            res.status(500).json({ error: e })
-        }
-    }
+            if (userrole === "admin") {
+                user = await UserAuthenticationDAO.checkAdminForUsername(username) 
+                
+                if (user && ( password === user.password)) {
+                    res.json({
+                        _id: user._id,
+                        username: user.username,
+                        userrole: "admin"
+                    })
+                } else {
+                    res.status(401).send({message: 'invalid email or password'});
+                }
 
-    static async verifyCustomerLogin(req, res, next) {
-        try {
-            const username = req.body.username
-            const password = req.body.password
-
-            if (await LoginController.usernameAndPasswordMatch(username, password, false)) {
-                res.json({ message: "login valid" })
-            } 
-            else {
-                res.json({ error: "username and password do not match" })
-            }
-        } catch (e) {
-            console.error(e)
-            res.status(500).json({ error: e })
-        }
-    }
-
-    static async usernameAndPasswordMatch(username, password, isAdmin) {
-        try {
-            let foundUser
-            if (isAdmin) {
-                foundUser = await UserAuthenticationDAO.checkAdminForUsername(username)
             } else {
-                foundUser = await UserAuthenticationDAO.checkCustomerForUsername(username)
-            }
-            
-            if (!foundUser) {
-                return false
-            }
-            else if (foundUser.username == username && foundUser.password == password) {
-                return true
-            } else {
-                return false
+                user = await UserAuthenticationDAO.checkCustomerForUsername(username)
+
+                if (user && (password === user.password)) {
+                    res.json({
+                        _id: user._id,
+                        username: user.username,
+                        userrole: "customer"
+                    })
+                } else {
+                    res.status(401).send({message: 'invalid email or password'});
+                }
+
             }
         } catch (e) {
-            console.error(e)
-            return false
-        }
+            res.status(500).json({error: e.message})
+        }   
     }
+    
+
 }
