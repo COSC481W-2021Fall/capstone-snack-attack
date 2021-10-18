@@ -30,7 +30,7 @@ const App = () => {
         <header className="row">
           <div>
             <a className="brand" href="/">
-              amazona
+              CrossAmazon
             </a>
           </div>
           <div>
