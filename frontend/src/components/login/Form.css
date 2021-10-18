@@ -61,13 +61,13 @@
     color: #fff;
   }
   
-  .form-content-right {
+  .loginform-content-right {
     border-radius: 0 10px 10px 0;
     position: relative;
-    background: linear-gradient(90deg, rgb(119, 232, 240) 0%, rgb(202, 169, 233) 100%);
+    background: linear-gradient(90deg, rgb(119, 232, 240) 0%, rgb(49, 208, 236) 100%);
   }
   
-  .form {
+  .loginform {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -80,28 +80,34 @@
     align-items: center;
   }
   
-  .form h1 {
+  .loginform h1 {
     font-size: 1rem;
     text-align: start;
     width: 80%;
     margin-bottom: 1rem;
     color: #fff;
   }
+
+  .loginform h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
   
-  .form-inputs {
+  .loginform-inputs {
     margin-bottom: 0.5rem;
     width: 80%;
   }
   
-  .form-inputs p {
-    font-size: 0.8rem;
+  .loginform-inputs p {
+    font-size: 1.6rem;
     margin-top: 0.5rem;
     color: #f00e0e;
   }
   
-  .form-label {
+  .loginform-label {
     display: inline-block;
-    font-size: 0.8rem;
+    font-size: 1.6rem;
     margin-bottom: 6px;
     color: #fff;
   }
@@ -121,7 +127,7 @@
     font-size: 12px;
   }
   
-  .form-input-btn {
+  .loginform-input-btn {
     width: 80%;
     height: 50px;
     margin-top: 10px;
@@ -134,7 +140,7 @@
     outline: none;
     border: none;
     color: #fff;
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
   
   .form-input-btn:hover {
@@ -147,8 +153,8 @@
     transition: all 0.4s ease-out;
   }
   
-  .form-input-login {
-    font-size: 0.8rem;
+  .loginform-input-login {
+    font-size: 1.6rem;
     margin-top: 10px;
     color: #fff;
     width: 80%;

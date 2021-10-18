@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import UserActions from "../../../services/userAction";
+import UserActions from "../../services/userAction";
 
 
 
@@ -9,7 +9,7 @@ const useForm = (callback, validate) => {
     email: '',
     password: '',
     password2: '',
-    isAdmin: 'yes'
+    userrole: '',  
   });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,17 +30,18 @@ const useForm = (callback, validate) => {
     setIsSubmitting(true);
    
     
-    UserActions.uniqueValid({username: values.email, isAdmin: values.isAdmin}).then(response => {
+    UserActions.uniqueValid({username: values.email, userrole: values.userrole}).then(response => {
       console.log(response.data.message);
     }).catch((e) => {if(e.response.status === 401) {
       console.log(e);
       window.alert("This username already exists. Please try another one")
     } else {
       console.log(e);
-      window.alert("Can not sign up")
+      // window.alert("Can not sign up")
     }
    });
-   
+
+
   };
 
   
@@ -49,14 +50,14 @@ const useForm = (callback, validate) => {
       if (Object.keys(errors).length === 0 && isSubmitting) {
         callback();
 
-        UserActions.createAdminAccount({username: values.email, password: values.password}).then(response => {
+        UserActions.createAccount({username: values.email, password: values.password, userrole: values.userrole}).then(response => {
           console.log(response.data.message);
         }).catch((e) => {if(e.response.status === 401) {
           console.log(e);
           window.alert("This username already exists. Please try another one")
         } else {
           console.log(e);
-          window.alert("Can not sign up")
+        //  window.alert("Can not sign up")
         }
        })
 

@@ -2,12 +2,7 @@
 export default function ValidateInfo(values) {
     let errors = {};
   
-    // if (!values.username.trim()) {
-    //   errors.username = 'Username required';
-    // }
-    // else if (!/^[A-Za-z]+/.test(values.name.trim())) {
-    //   errors.name = 'Enter a valid name';
-    // }
+
   
     if (!values.email) {
       errors.email = 'Email required';
@@ -32,6 +27,9 @@ export default function ValidateInfo(values) {
       errors.password2 = 'Passwords do not match';
     }
     
+    if(!values.userrole) {
+      errors.userrole = 'Please select "store manager" or "customer" '
+    }
 
     return errors;
 

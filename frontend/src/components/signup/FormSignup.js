@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import validate from './validateInfo';
 import useForm from './useForm';
 import './Form.css';
@@ -11,13 +12,13 @@ const FormSignup = ({ submitForm }) => {
 
   return (
     <div className='form-content-right'>
-      <form onSubmit={handleSubmit} className='form' noValidate>
-        <h1>
-          Create an account!
-        </h1>
+      <form onSubmit={handleSubmit} className='signupform' noValidate>
+        <h2>
+          Create your account
+        </h2>
 
-        <div className='form-inputs'>
-          <label className='form-label'>Username</label>
+        <div className='signupform-inputs'>
+          <label className='signupform-label'>Username</label>
           <input
             className='form-input'
             type='email'
@@ -28,8 +29,8 @@ const FormSignup = ({ submitForm }) => {
           />
           {errors.email && <p>{errors.email}</p>}
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Password</label>
+        <div className='signupform-inputs'>
+          <label className='signupform-label'>Password</label>
           <input
             className='form-input'
             type='password'
@@ -40,8 +41,8 @@ const FormSignup = ({ submitForm }) => {
           />
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Confirm Password</label>
+        <div className='signupform-inputs'>
+          <label className='signupform-label'>Confirm Password</label>
           <input
             className='form-input'
             type='password'
@@ -53,41 +54,36 @@ const FormSignup = ({ submitForm }) => {
           {errors.password2 && <p>{errors.password2}</p>}
         </div>
 
-        
-{/*         <div className='form-inputs'>
-          <label className='form-label'>Address</label>
-          <input
-            className='form-input'
-            type='address'
-            name='address'
-            placeholder='Enter your address'
-            value={values.address}
+        <div className='signupform-inputs'>
+          <label className='signupform-label'>Store manager</label>
+          <input  
+            className='form-select'
+            type='radio'
+            name='userrole'
+            checked={values.userrole === 'admin'}
+            value='admin'
+            onChange={handleChange}
+          />  
+
+          <label className='signupform-label'>Customer</label>
+          <input  
+            className='form-select'
+            type='radio'
+            name='userrole'
+            checked={values.userrole === 'customer'}
+            value='customer'
             onChange={handleChange}
           />
-          {errors.address && <p>{errors.address}</p>}
-        </div>
-        <div className='form-inputs'>
-          <label className='form-label'>Telephone</label>
-          <input
-            className='form-input'
-            type='telephone'
-            name='telephone'
-            placeholder='Enter your phone number'
-            value={values.telephone}
-            onChange={handleChange}
-          />
-          {errors.telephone && <p>{errors.telephone}</p>}
-        </div> */}
 
-       
+          {errors.userrole && <p>{errors.userrole}</p>}
+        </div>  
 
-
-
-        <button className='form-input-btn' type='submit'>
+        <button className='signupform-input-btn' type='submit'>
           Sign up
         </button>
-        <span className='form-input-login'>
-          Already have an account? Login <a href='#'>here</a>
+        <span className='signupform-input-login'>
+          Already have an account? Login 
+          <Link to="/login"> here</Link>
         </span>
       </form>
     </div>
