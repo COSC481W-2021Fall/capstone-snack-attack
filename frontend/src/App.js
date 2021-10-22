@@ -8,6 +8,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import ProductAddScreen from "./screens/ProductAddScreen";
 
 // import Header from "./components/Header";
 // import Footer from "./components/Footer";
@@ -36,6 +37,7 @@ const App = () => {
             <Route exact path="/" component={HomeScreen} />
             <Route exact path="/login" component={LoginScreen} />
             <Route exact path="/register" component={RegisterScreen} />
+            <Route path="/addproduct/:adminId" component={ProductAddScreen} />
           
 {/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
             <Route path="/productedit/:productId" component={ProductEditScreen} /> */}

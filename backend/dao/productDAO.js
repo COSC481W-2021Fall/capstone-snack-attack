@@ -19,7 +19,7 @@ export default class SignupDAO {
     // checks for a product item that has the same title and store. Items from different stores can have the same title
     static async checkProductsForDuplicate(productInfo) {
         try {
-            let duplicate = await products.findOne({ title: productInfo.title, store: productInfo.store })
+            let duplicate = await products.findOne({ title: productInfo.title, adminId: productInfo.adminId })
             return duplicate
         } catch (e) {
             console.error(e)

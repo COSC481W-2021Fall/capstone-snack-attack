@@ -14,7 +14,9 @@ class UserActions {
         return http.post("/login", data);
     }
 
-
+    addProduct(data) {
+        return http.post("/product/add", data);
+    }
 
 }
 
