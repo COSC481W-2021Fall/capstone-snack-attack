@@ -28,6 +28,16 @@ export default class UserAuthenticationDAO {
         }
     }
 
+    static async checkAdminForId(id) {
+        try {
+            let user = await admin.findOne({ _id: id })
+            return user
+        } catch (e) {
+            console.error(e)
+            return user
+        }
+    }
+
     static async checkCustomerForUsername(username) {
         try {
             let user = await customer.findOne({ username: username })
