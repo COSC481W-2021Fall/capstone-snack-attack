@@ -1,4 +1,5 @@
 import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
+import PasswordEncryption from "../passwordEncryption.js"
 
 export default class SignupController {
 
@@ -33,7 +34,7 @@ export default class SignupController {
     static async Signup(req, res, next) {
         try {
             const username = req.body.username
-            const password = req.body.password
+            const password = PasswordEncryption.encryptPassword(req.body.password)
             const userrole = req.body.userrole
 
             let usernameUnique

@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"; 
+import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
 import { Container } from "react-bootstrap";
 
 import HomeScreen from "./screens/HomeScreen";
@@ -26,28 +26,34 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 
 const App = () => {
   return (
-    <Router>
- 
+    <BrowserRouter>
+      <div className="grid-container">
+        <header className="row">
+          <div>
+            <a className="brand" href="/">
+              CrossAmazon
+            </a>
+          </div>
+          <div>
+            <a href="/cart">Cart</a>
+            <a href="/login">Sign In</a>
+          </div>
+        </header>
+        <main>
+          <Container>
+            <Switch>
+              <Route exact path="/" component={HomeScreen} />
+              <Route exact path="/login" component={LoginScreen} />
+              <Route exact path="/register" component={RegisterScreen} />
+              <Route path="/addproduct/:adminId" component={ProductAddScreen} />
 
-      <main >
-        <Container>
-  
-          <Switch>
-
-            <Route exact path="/" component={HomeScreen} />
-            <Route exact path="/login" component={LoginScreen} />
-            <Route exact path="/register" component={RegisterScreen} />
-            <Route path="/addproduct/:adminId" component={ProductAddScreen} />
-          
-{/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
+              {/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
             <Route path="/productedit/:productId" component={ProductEditScreen} /> */}
-
-          </Switch>
-
-        </Container>
-      </main>
-
-    </Router>
+            </Switch>
+          </Container>
+        </main>
+      </div>
+    </BrowserRouter>
   );
 };
 
