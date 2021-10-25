@@ -1,5 +1,7 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom"; 
+
+import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+
 import { Container } from "react-bootstrap";
 
 import HomeScreen from "./screens/HomeScreen";
