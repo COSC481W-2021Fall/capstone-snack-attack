@@ -1,16 +1,24 @@
 import React from "react";
+
 import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+
 import { Container } from "react-bootstrap";
 
 import HomeScreen from "./screens/HomeScreen";
 import LoginScreen from "./screens/LoginScreen";
 import RegisterScreen from "./screens/RegisterScreen";
+import Header from "./components/header/header";
 
-import ProductListScreen from "./screens/ProductListScreen";
+import CartScreen from "./screens/CartScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import ProductAddScreen from "./screens/ProductAddScreen";
 
-// import Header from "./components/Header";
+
+
+
+
+// import ProductListScreen from "./screens/ProductListScreen";
+
 // import Footer from "./components/Footer";
 
 // import ProductScreen from "./screens/ProductScreen";
@@ -24,35 +32,41 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 // import UserEditScreen from "./screens/UserEditScreen";
 // import OrderListScreen from "./screens/OrderListScreen";
 
+
+
 const App = () => {
+
+
+
+
   return (
     <BrowserRouter>
-      <div className="grid-container">
-        <header className="row">
-          <div>
-            <a className="brand" href="/">
-              CrossAmazon
-            </a>
-          </div>
-          <div>
-            <a href="/cart">Cart</a>
-            <a href="/login">Sign In</a>
-          </div>
-        </header>
-        <main>
-          <Container>
-            <Switch>
-              <Route exact path="/" component={HomeScreen} />
-              <Route exact path="/login" component={LoginScreen} />
-              <Route exact path="/register" component={RegisterScreen} />
-              <Route path="/addproduct/:adminId" component={ProductAddScreen} />
 
-              {/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
-            <Route path="/productedit/:productId" component={ProductEditScreen} /> */}
-            </Switch>
-          </Container>
-        </main>
+      <div className="grid-container">
+
+
+        <Header />
+
+
+      <main >
+        <Container>
+  
+          <Switch>
+
+            <Route exact path="/productedit" component={ProductEditScreen} />
+            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/login" component={LoginScreen} />
+            <Route exact path="/register" component={RegisterScreen} /> 
+            <Route exact path="/cart" component={CartScreen} />    
+   
+
+
+          </Switch>
+
+        </Container>
+      </main>
       </div>
+
     </BrowserRouter>
   );
 };
