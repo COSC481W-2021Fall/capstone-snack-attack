@@ -1,5 +1,5 @@
 import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectID
+const ObjectId = mongodb.ObjectId
 let admin
 let customer
 
@@ -51,12 +51,22 @@ export default class UserAuthenticationDAO {
         }
     }
 
-    static async createCustomerAccount(customerInfo) {
+    static async createCustomerAccount(username, password) {
         try {
-            return await customer.insertOne(customerInfo)
+            const customerAccount = {
+                username: username,
+                password: password,
+            }
+
+            return await customer.insertOne(customerAccount)
         } catch (e) {
             console.error(e)
             return { error: e}
         }
     }
+
+
+
+
+
 }

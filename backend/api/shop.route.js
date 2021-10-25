@@ -5,10 +5,13 @@ import ProductController from "./product.controller.js";
 
 const router = express.Router();
 
-router.route("/signup/admin").post(SignupController.verifyAdminSignup);
-router.route("/signup/customer").post(SignupController.verifyCustomerSignup);
-router.route("/login/admin").post(LoginController.verifyAdminLogin)
-router.route("/login/customer").post(LoginController.verifyCustomerLogin)
+
+router.route("/signup/isunique").post(SignupController.userUnique);
+router.route("/signup").post(SignupController.Signup);
+router.route("/login").post(LoginController.verifyLogin)
+
+
 router.route("/product/add").post(ProductController.verifyAddProduct);
+
 
 export default router;

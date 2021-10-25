@@ -1,56 +1,71 @@
 import React from "react";
-import { Admin, Resource, EditGuesser } from "react-admin";
-import { UserList } from './components/Users';
-import restProvider from 'ra-data-simple-rest';
-import { Switch, Route, Link, BrowserRouter} from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { useSelector } from 'react-redux';
-import SigninScreen from './screen/SigninScreen';
-import HomeScreen from './screen/HomeScreen';
-import ProductScreen from './screen/ProductScreen';
+import { BrowserRouter, Route, Switch } from "react-router-dom"; 
+import { Container } from "react-bootstrap";
 
-//import Login from "./";
+import HomeScreen from "./screens/HomeScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+import Header from "./components/header/header";
 
-import UploadProductPage from "./components/uploadProduct";
-//import UploadProductPage from "./components/uploadProductsComponents"; 
+import CartScreen from "./screens/CartScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
 
-const dataProvider = restProvider('http://localhost:3000')
-function App() {
-  const [user, setUser] = React.useState(null);
 
-  async function login(user = null) {
-    setUser(user);
-  }
 
-  async function logout() {
-    setUser(null)
-  }
+
+
+// import ProductListScreen from "./screens/ProductListScreen";
+
+// import Footer from "./components/Footer";
+
+// import ProductScreen from "./screens/ProductScreen";
+// import CartScreen from "./screens/CartScreen";
+// import ProfileScreen from "./screens/ProfileScreen";
+// import ShippingScreen from "./screens/ShippingScreen";
+// import PaymentScreen from "./screens/PaymentScreen";
+// import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+// import OrderScreen from "./screens/OrderScreen";
+// import UserListScreen from "./screens/UserListScreen";
+// import UserEditScreen from "./screens/UserEditScreen";
+// import OrderListScreen from "./screens/OrderListScreen";
+
+
+
+const App = () => {
 
 
 
 
   return (
-    <div>
-      <div className="container mt-3">
-      <BrowserRouter>
+    <BrowserRouter>
+
+      <div className="grid-container">
+
+        <Header />
+
+
+      <main >
+        <Container>
+  
           <Switch>
-           <Route 
-            path="/components/uploadProduct"
-            render={(props) => (
-              <UploadProductPage {...props} />
-            )}
-          />
+
+            <Route exact path="/productedit" component={ProductEditScreen} />
+            <Route exact path="/" component={HomeScreen} />
+            <Route exact path="/login" component={LoginScreen} />
+            <Route exact path="/register" component={RegisterScreen} /> 
+            <Route exact path="/cart" component={CartScreen} />    
+   
+{/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
+            <Route path="/productedit/:productId" component={ProductEditScreen} /> */}
+
           </Switch>
-      </BrowserRouter> 
-      <Admin dataProvider={dataProvider}>
-        <Resource
-         name="users"
-          list={UserList}
-          edit={EditGuesser} />
-      </Admin>
+
+        </Container>
+      </main>
       </div>
-    </div>
+
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
