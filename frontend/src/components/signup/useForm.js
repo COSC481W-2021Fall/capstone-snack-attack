@@ -47,6 +47,8 @@ const useForm = (callback, validate) => {
   
   useEffect(
     () => {
+      
+
       if (Object.keys(errors).length === 0 && isSubmitting) {
         callback();
 
@@ -54,13 +56,14 @@ const useForm = (callback, validate) => {
           console.log(response.data.message);
         }).catch((e) => {if(e.response.status === 401) {
           console.log(e);
-          window.alert("This username already exists. Please try another one")
+        //  window.alert("This username already exists. Please try another one")
         } else {
           console.log(e);
         //  window.alert("Can not sign up")
         }
        })
 
+      
 
       }
     },
