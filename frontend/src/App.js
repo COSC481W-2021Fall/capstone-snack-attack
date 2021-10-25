@@ -11,6 +11,7 @@ import Header from "./components/header/header";
 
 import CartScreen from "./screens/CartScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
+import ProductAddScreen from "./screens/ProductAddScreen";
 
 
 
@@ -43,6 +44,7 @@ const App = () => {
 
       <div className="grid-container">
 
+
         <Header />
 
 
@@ -57,8 +59,7 @@ const App = () => {
             <Route exact path="/register" component={RegisterScreen} /> 
             <Route exact path="/cart" component={CartScreen} />    
    
-{/*             <Route path="/productlist/:adminId" component={ProductListScreen} />
-            <Route path="/productedit/:productId" component={ProductEditScreen} /> */}
+
 
           </Switch>
 

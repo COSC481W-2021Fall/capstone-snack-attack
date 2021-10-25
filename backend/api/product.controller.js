@@ -1,5 +1,7 @@
 import ProductDAO from "../dao/productDAO.js"
 import UserAuthenticationDAO from "../dao/userAuthenticationDAO.js"
+import mongodb from "mongodb"
+const ObjectId = mongodb.ObjectId
 
 export default class ProductController {
     static async verifyAddProduct(req, res, next) {
@@ -9,28 +11,47 @@ export default class ProductController {
             description: req.body.description,
             quantity: req.body.quantity,
             category: req.body.category,
-            store: req.body.username
+            adminId: req.body.adminId,
+            image: req.body.image
         }
-        const username = req.body.username
 
-        if (!await ProductController.userIsAdmin(username)) {
-            res.json({ error: "user is not a store admin" })
+        if (!await ProductController.userIsAdmin(ObjectId(productInfo.adminId))) {
+            res.json({ 
+                success: "false", 
+                error: "Error: This user is not a store manager." 
+            })
         }
         else if (await ProductController.productIsDuplicate(productInfo)) {
-            res.json({ error: "product is a duplicate" })
+            res.json({ 
+                success: "false",
+                error: "Error: The product is a duplicate for this store." 
+            })
         }
         else if (productInfo.quantity < 1) {
-            res.json({ error: "quantity must be more than 0" })
+            res.json({ 
+                success: "false",
+                error: "Error: The quantity must be greater than 0." 
+            })
         }
         else {
             let productResponse = await ProductDAO.addProduct(productInfo)
-            res.json({ productResponse })
+            if (!productResponse.acknowledged) {
+                res.json({
+                    success: "false",
+                    error: "Error: Product was not added to database."
+                })
+            }
+            else {
+                res.json({ 
+                    success: "true"
+                 })
+            }
         }
     }
 
-    static async userIsAdmin(username) {
+    static async userIsAdmin(adminId) {
         try {
-            let user = await UserAuthenticationDAO.checkAdminForUsername(username)
+            let user = await UserAuthenticationDAO.checkAdminForId(adminId)
             
             if (user) {
                 return true
