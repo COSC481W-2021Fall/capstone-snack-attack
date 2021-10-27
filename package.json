@@ -1,0 +1,37 @@
+{
+  "name": "crossamazon",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "Ecommerce website like amazon",
+  "main": "index.js",
+  
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js",
+    "client": "npm start --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+   
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/COSC481W-2021Fall/capstone-snack-attack.git"
+  },
+  "author": "",
+  "license": "ISC",
+ 
+
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-async-handler": "^1.1.4",
+    "mongoose": "^5.10.6"
+  
+  },
+  "devDependencies": {
+    "concurrently": "^5.3.0",
+    "nodemon": "^2.0.4"
+  }
+  
+  
+}
