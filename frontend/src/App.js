@@ -13,10 +13,6 @@ import CartScreen from "./screens/CartScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import ProductAddScreen from "./screens/ProductAddScreen";
 
-
-
-
-
 // import ProductListScreen from "./screens/ProductListScreen";
 
 // import Footer from "./components/Footer";
@@ -32,43 +28,28 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 // import UserEditScreen from "./screens/UserEditScreen";
 // import OrderListScreen from "./screens/OrderListScreen";
 
-
-
 const App = () => {
-
-
-
-
   return (
     <BrowserRouter>
-
       <div className="grid-container">
-
-
         <Header />
 
-
-      <main >
-        <Container>
-  
-          <Switch>
-
-            <Route exact path="/productedit" component={ProductEditScreen} />
-            <Route exact path="/" component={HomeScreen} />
-            <Route exact path="/login" component={LoginScreen} />
-            <Route exact path="/register" component={RegisterScreen} /> 
-            <Route exact path="/cart" component={CartScreen} />    
-            <Route path="/addproduct/:adminId" component={ProductAddScreen} />
-
-
-          </Switch>
-
-        </Container>
-      </main>
+        <main>
+          <Container>
+            <Switch>
+              <Route exact path="/productedit" component={ProductEditScreen} />
+              <Route exact path="/" component={HomeScreen} />
+              <Route exact path="/login" component={LoginScreen} />
+              <Route exact path="/register" component={RegisterScreen} />
+              <Route exact path="/cart" component={CartScreen} />
+              <Route path="/addproduct/:adminId" component={ProductAddScreen} />
+            </Switch>
+          </Container>
+        </main>
       </div>
-
     </BrowserRouter>
   );
 };
 
 export default App;
+
