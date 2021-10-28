@@ -1,13 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import { useParams } from "react-router";
-import { Typography, Button, Form, message, Input, Icon } from 'antd';
-import Axios from 'axios';
+import { Typography, Button, Form, message, Input, Icon } from "antd";
+import Axios from "axios";
 import UserActions from "../services/userAction";
 
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function UploadProductPage(props) {
+function UploadProductPage({adminId}) {
 
     const [TitleValue, setTitleValue] = useState("")
     const [DescriptionValue, setDescriptionValue] = useState("")
@@ -15,8 +15,6 @@ function UploadProductPage(props) {
     const [QuantityValue, setQuantityValue] = useState(0)
     const [CategoryValue, setCategoryValue] = useState("")
     const [Image, setImage] = useState("")
-
-    const adminId = useParams()
 
     const onTitleChange = (event) => {
         setTitleValue(event.currentTarget.value)
@@ -43,7 +41,7 @@ function UploadProductPage(props) {
         const formData = new FormData();
         formData.append("image", file);
         formData.append("title", TitleValue);
-        formData.append("adminId", adminId.adminId);
+        formData.append("adminId", adminId);
     
         try {
             const config = {
@@ -69,7 +67,7 @@ function UploadProductPage(props) {
         }
 
         const variables = {
-            adminId: adminId.adminId,
+            adminId: adminId,
             title: TitleValue,
             description: DescriptionValue,
             price: PriceValue,
@@ -162,4 +160,4 @@ function UploadProductPage(props) {
     )
 }
 
-export default UploadProductPage
+export default UploadProductPage;

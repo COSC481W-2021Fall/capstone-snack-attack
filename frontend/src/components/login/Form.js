@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Form.css';
 import FormLogin from './FormLogin';
-import FormSuccess from './FormSuccess';
+// import FormSuccess from './FormSuccess';
+import { Redirect } from 'react-router';
 
 const Form = () => {
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -23,7 +24,8 @@ const Form = () => {
         {!isSubmitted ? (
           <FormLogin submitForm={submitForm} />
         ) : (
-          <FormSuccess />
+          // <FormSuccess />
+          <Redirect to='/' />
         )}
       </div>
     </>
