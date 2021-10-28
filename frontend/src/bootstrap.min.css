@@ -395,7 +395,7 @@ hr {
 }
 small,
 .small {
-  font-size: 80%;
+  font-size: 100%;
   font-weight: 400;
 }
 mark,
@@ -3273,7 +3273,7 @@ input[type="button"].btn-block {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
-  font-size: 0.875rem;
+  font-size: 1rem;
   color: #55595c;
   text-align: left;
   list-style: none;
@@ -4240,7 +4240,7 @@ input[type="button"].btn-block {
   padding-top: 0.3359375rem;
   padding-bottom: 0.3359375rem;
   margin-right: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.9rem;
   line-height: inherit;
   white-space: nowrap;
 }
@@ -4259,6 +4259,7 @@ input[type="button"].btn-block {
   padding-left: 0;
   margin-bottom: 0;
   list-style: none;
+  font-size: 1.3rem;
 }
 .navbar-nav .nav-link {
   padding-right: 0;
@@ -4285,7 +4286,7 @@ input[type="button"].btn-block {
 }
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.09375rem;
+  font-size: 1rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
