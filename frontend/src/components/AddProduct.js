@@ -14,7 +14,7 @@ function UploadProductPage(props) {
     const [PriceValue, setPriceValue] = useState(0)
     const [QuantityValue, setQuantityValue] = useState(0)
     const [CategoryValue, setCategoryValue] = useState("")
-    const [Images, setImages] = useState([])
+    const [Image, setImage] = useState("")
 
     const adminId = useParams()
 
@@ -38,15 +38,33 @@ function UploadProductPage(props) {
         setCategoryValue(event.currentTarget.value)
     }
 
-    const updateImages = (event) => {
-        setImages(event.currentTarget.value)
-    }
+    const updateImage = async (e) => {
+        const file = e.target.files[0];
+        const formData = new FormData();
+        formData.append("image", file);
+        formData.append("title", TitleValue);
+        formData.append("adminId", adminId.adminId);
+    
+        try {
+            const config = {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            };
+    
+            const { data } = await Axios.post("http://localhost:5000/api/v1/eShop/product/add/image", formData, config);
+            setImage(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     const onSubmit = (event) => {
         event.preventDefault();
 
 
         if (!TitleValue || !DescriptionValue || !PriceValue || 
-             !QuantityValue || ! CategoryValue || !Images) {
+             !QuantityValue || ! CategoryValue || !Image) {
             return alert('Error: All fields must be filled.')
         }
 
@@ -57,12 +75,11 @@ function UploadProductPage(props) {
             price: PriceValue,
             quantity: QuantityValue, 
             category: CategoryValue,
-            image: Images
+            image: Image
         }
 
         UserActions.addProduct(variables)
             .then(response => {
-                console.log(response.data)
                 if (response.data.success == "false") {
                     alert(response.data.error)
                 }
@@ -125,8 +142,7 @@ function UploadProductPage(props) {
 
                 <label>Photo</label>
                 <Input
-                    onChange={updateImages}
-                    value={Images}
+                    onChange={updateImage}
                     type="file" 
                     accept=".png, .jpg, .jpeg"
                     name="photo"
@@ -142,7 +158,6 @@ function UploadProductPage(props) {
 
             </Form>
 
-            <img src={Images}></img>
         </div>
     )
 }
