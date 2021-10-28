@@ -42,7 +42,7 @@ const App = () => {
               <Route exact path="/login" component={LoginScreen} />
               <Route exact path="/register" component={RegisterScreen} />
               <Route exact path="/cart" component={CartScreen} />
-              <Route path="/addproduct/:adminId" component={ProductAddScreen} />
+              <Route path="/addproduct" component={ProductAddScreen} />
             </Switch>
           </Container>
         </main>

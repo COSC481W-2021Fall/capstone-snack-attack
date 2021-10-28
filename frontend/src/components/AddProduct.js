@@ -7,7 +7,7 @@ import UserActions from "../services/userAction";
 const { Title } = Typography;
 const { TextArea } = Input;
 
-function UploadProductPage(props) {
+function UploadProductPage({adminId}) {
   const [TitleValue, setTitleValue] = useState("");
   const [DescriptionValue, setDescriptionValue] = useState("");
   const [PriceValue, setPriceValue] = useState(0);
@@ -15,7 +15,7 @@ function UploadProductPage(props) {
   const [CategoryValue, setCategoryValue] = useState("");
   const [Images, setImages] = useState([]);
 
-  const adminId = useParams();
+//   const adminId = useParams();
 
   const onTitleChange = (event) => {
     setTitleValue(event.currentTarget.value);
@@ -55,7 +55,7 @@ function UploadProductPage(props) {
     }
 
     const variables = {
-      adminId: adminId.adminId,
+      adminId: adminId,
       title: TitleValue,
       description: DescriptionValue,
       price: PriceValue,
