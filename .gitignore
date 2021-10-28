@@ -11,3 +11,6 @@ npm-debug.log
 
 build/
 dist/
+
+backend/uploads/*
+!backend/uploads/.gitkeep
