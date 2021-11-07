@@ -16,9 +16,9 @@ import {
     productUpdateReducer,
     productReviewCreateReducer,
     productTopRatedReducer,
-  } from "./reducers/productReducers";
+  } from "./reducers/productReducers";  */
   
-  import { cartReducer } from "./reducers/cartReducers"; */
+  import { cartReducer } from "./reducers/cartReducers"; 
   
   import {
     userLoginReducer,
@@ -43,7 +43,7 @@ import {
     productReviewCreate: productReviewCreateReducer,
     productTopRated: productTopRatedReducer, */
     //
-    // cart: cartReducer, // matches the property name 'cart' in initialState
+    cart: cartReducer, // matches the property name 'cart' in initialState
     userLogin: userLoginReducer, // matches the property name 'userLogin' in initialState
 
 /*     orderCreate: orderCreateReducer,
@@ -55,25 +55,23 @@ import {
   });
   
   // ====== Data stored in LocalStorage ======
-  
+  //localStorage.clear()
   const cartItemsFromStorage = localStorage.getItem("cartItems")
     ? JSON.parse(localStorage.getItem("cartItems"))
-    : [];
+    : [];  
   
   const userInfoFromStorage = localStorage.getItem("userInfo")
     ? JSON.parse(localStorage.getItem("userInfo"))
     : null;
   
-  const shippingAddressFromStorage = localStorage.getItem("shippingAddress")
-    ? JSON.parse(localStorage.getItem("shippingAddress"))
-    : {};
+
   
   // ====== Initial state with data stored in LocalStorage ======
   const initialState = {
     cart: {
       cartItems: cartItemsFromStorage,
-      shippingAddress: shippingAddressFromStorage,
-    },
+      
+    },  
     userLogin: { userInfo: userInfoFromStorage },
   };
   

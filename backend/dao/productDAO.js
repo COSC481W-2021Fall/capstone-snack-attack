@@ -1,5 +1,5 @@
 import mongodb from "mongodb"
-const ObjectId = mongodb.ObjectID
+const ObjectId = mongodb.ObjectId
 let products
 
 export default class SignupDAO {
@@ -30,6 +30,18 @@ export default class SignupDAO {
     static async addProduct(productInfo) {
         try {
             return await products.insertOne(productInfo)
+        } catch (e) {
+            console.error(e)
+            return { error: e}
+        }
+    }
+
+    static async findProductById(productId) {
+        const _id = new ObjectId(productId)
+        
+        try {
+            let product = await products.findOne({_id: _id})
+            return product
         } catch (e) {
             console.error(e)
             return { error: e}

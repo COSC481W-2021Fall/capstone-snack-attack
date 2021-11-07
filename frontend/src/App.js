@@ -1,6 +1,6 @@
 import React from "react";
 
-import { BrowserRouter, Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import { Container } from "react-bootstrap";
 
@@ -10,14 +10,14 @@ import RegisterScreen from "./screens/RegisterScreen";
 import Header from "./components/header/header";
 
 import CartScreen from "./screens/CartScreen";
-import ProductEditScreen from "./screens/ProductEditScreen";
+// import ProductEditScreen from "./screens/ProductEditScreen";
 import ProductAddScreen from "./screens/ProductAddScreen";
 
 // import ProductListScreen from "./screens/ProductListScreen";
 
 // import Footer from "./components/Footer";
 
-// import ProductScreen from "./screens/ProductScreen";
+import ProductScreen from "./screens/ProductScreen";
 // import CartScreen from "./screens/CartScreen";
 // import ProfileScreen from "./screens/ProfileScreen";
 // import ShippingScreen from "./screens/ShippingScreen";
@@ -29,6 +29,8 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 // import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
+
+
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -37,12 +39,13 @@ const App = () => {
         <main>
           <Container>
             <Switch>
-              <Route exact path="/productedit" component={ProductEditScreen} />
+              {/* <Route exact path="/productedit" component={ProductEditScreen} /> */}
               <Route exact path="/" component={HomeScreen} />
               <Route exact path="/login" component={LoginScreen} />
               <Route exact path="/register" component={RegisterScreen} />
               <Route exact path="/cart" component={CartScreen} />
               <Route path="/addproduct" component={ProductAddScreen} />
+              <Route path="/product/:productId" component={ProductScreen} />
             </Switch>
           </Container>
         </main>
