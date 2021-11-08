@@ -89,11 +89,6 @@ export default class ProductController {
             let product = await ProductDAO.findProductById(productId)
 
             if (product) {
-/*                 res.json({
-                    _id: product._id,
-                    title: product.title,
-                    price: product.price,
-                }); */
                     res.json(product)
             } else {
                 res.status(404).send({message: 'Product not found'});
