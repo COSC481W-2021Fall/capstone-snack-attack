@@ -24,46 +24,7 @@ const Header = () => {
   };
 
   return (
-    /*         <header className="row">
-          <div>
-            <a className="brand" href="/">
-              CrossAmazon
-            </a>
-          </div>
-          <div>
-            <a href="/cart">Cart</a> */
 
-    /*             {/* <a href="/productedit">Add Products</a> */
-
-    /*             {
-                (userInfo && userInfo.userrole === 'admin') ? (                    
-                    <a href="/adminpanel">Store Manager</a>                                                
-                ) : (
-                    <a href="/customerpanel">Customer</a>
-                )
-            } */
-
-    /*             {
-              userInfo ? (
-                <Button onClick={handleLogout}>Log out</Button>
-              ) : (
-                <a href="/login">Sign In</a>
-              )
-            } */
-
-    /* {/*             {
-                userInfo ? (
-                    userInfo.userrole === 'admin' ? (
-                        <a href="/adminpanel">Store Manager</a>
-                        
-                        // <Button onClick={handleLogout}>Log out</Button>
-                        ) : (
-                        <a href="/customerpanel">Customer</a>
-                        )
-                ) : (
-                    <a href="/login">Log In</a>
-                )
-            }  */
 
     <header>
       <Navbar bg="dark" variant="dark" expand="xl" collapseOnSelect>
@@ -86,17 +47,10 @@ const Header = () => {
                       <NavDropdown.Item>Add Products</NavDropdown.Item>
                     </LinkContainer>
 
-                    {/* <LinkContainer to="/editproduct">
-                      <NavDropdown.Item>Edit Products</NavDropdown.Item>
-                    </LinkContainer> */}
-
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Customer" id="admin">
-                    {/*                                         <LinkContainer to="/customerpanel">
-                                            <NavDropdown.Item>Panel</NavDropdown.Item>
-                                        </LinkContainer> */}
 
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>

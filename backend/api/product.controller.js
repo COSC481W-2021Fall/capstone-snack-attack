@@ -78,4 +78,23 @@ export default class ProductController {
             return false
         }
     }
+
+
+    static async getProductById(req, res, next) {
+        try {
+            const productId = req.params.id
+
+            console.log(productId)
+
+            let product = await ProductDAO.findProductById(productId)
+
+            if (product) {
+                    res.json(product)
+            } else {
+                res.status(404).send({message: 'Product not found'});
+            }
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }   
+    }
 }

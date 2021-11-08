@@ -13,5 +13,7 @@ router.route("/login").post(LoginController.verifyLogin)
 
 router.route("/product/add").post(ProductController.verifyAddProduct);
 
+router.route("/product/:id").get(ProductController.getProductById);
+
 
 export default router;
