@@ -1,45 +1,61 @@
 import React, { useState } from "react";
-import { Form, Button } from "react-bootstrap";
+import { Form, Button, Alert } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
-
 import { saveShippingAddress } from "../services/cartAction";
 
-const ShippingAddress = ({ history }) => {
-  //pull data from the Store.js (state.cart)
-  //assume that we will have the info comes here
+const ShippingAddressScreen = ({ history }) => {
+  //
+  // pull put data from Store (state.cart)
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
 
-  //state for data updated by form onChange actions.
+  //state for data updated by form onChange actions
   const [name, setName] = useState(shippingAddress.name);
   const [address, setAddress] = useState(shippingAddress.address);
   const [city, setCity] = useState(shippingAddress.city);
   const [state, setState] = useState(shippingAddress.state);
   const [zipcode, setZipcode] = useState(shippingAddress.zipcode);
 
+  //
   const dispatch = useDispatch();
 
+  function validateInput(str) {
+    var validateInput = true;
+    if (/[!@#$%^&*(),.?":{}|<>]/g.test(str) || /\d+/g.test(str)) {
+      validateInput = false;
+    }
+    return validateInput;
+  }
   const submitHandler = (e) => {
     e.preventDefault();
-    dispatch(saveShippingAddress({ name, address, city, state, zipcode }));
 
-    // history.push("/payment");
+    if (validateInput(name) && validateInput(state) && validateInput(city)) {
+      console.log("pass");
+
+      // dispatch(saveShippingAddress({ name, address, city, state, zipcode }));
+      //history.push("/payment");
+    } else {
+      alert("Invalid Input, please check and try again!");
+    }
   };
 
   return (
     <FormContainer>
+      {/* <CheckoutSteps step1 step2 /> */}
       <h1>Shipping Address</h1>
-      <Form onSumit={submitHandler}>
+      <Form onSubmit={submitHandler}>
         <Form.Group controlId="name">
           <Form.Label>Name</Form.Label>
-          <Form.Contorl
+          <Form.Control
             type="text"
             placeholder="Enter name"
+            //
+            // initial value from useState
             value={name}
             required
             onChange={(e) => setName(e.target.value)}
-          ></Form.Contorl>
+          ></Form.Control>
         </Form.Group>
 
         <Form.Group controlId="address">
@@ -82,9 +98,9 @@ const ShippingAddress = ({ history }) => {
         </Form.Group>
 
         <Form.Group controlId="zipcode">
-          <Form.Label>Postal Code</Form.Label>
+          <Form.Label>Zipcode</Form.Label>
           <Form.Control
-            type="text"
+            type="number"
             placeholder="Enter zipcode"
             //
             // initial value from useState
@@ -102,4 +118,4 @@ const ShippingAddress = ({ history }) => {
   );
 };
 
-export default ShippingAddress;
+export default ShippingAddressScreen;
