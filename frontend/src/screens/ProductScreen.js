@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Image, Row, Col } from "react-bootstrap";
 import { useParams } from "react-router";
 
 import { useState, useEffect} from "react";
@@ -15,6 +15,7 @@ function ProductScreen () {
   const { productId } = useParams();
   const [product, setProduct] = useState(undefined); 
   const dispatch = useDispatch();
+  var loading = true;
      
   console.log(productId)
   useEffect(() => {
@@ -28,6 +29,7 @@ function ProductScreen () {
 
   // check the information of product
   if(product){
+    loading = false;
     console.log(product)
     console.log(product.quantity)
   }
@@ -38,26 +40,55 @@ function ProductScreen () {
   }
   
 
-        
-  return (
-    <div>
-      <p>This is product screen.</p> 
+  if (loading == true) {
+    return (
+      <h1>LOADING</h1>
+    )
+  } else {
+    return (
+      <div>
+        <Row>
+          <Col md={3}> 
+            <Image src={product.image} alt={product.title} fluid></Image>
+          </Col>
 
-      {product &&
+          <Col md={3}>
+            <h1>{product.title}</h1>
+            <h2>Price</h2>
+            <p>${product.price}</p>
 
-      <Button onClick={
-        () => {
-          HandleAddToCart(productId);
-        } 
-      }
-      disabled={product.quantity === '0'}
-      >Add to Cart</Button> 
+            <h2>Description</h2>
+            <p>{product.description}</p>
 
-      }
+            <h2>Category</h2>
+            <p>{product.category}</p>
 
-    </div>
+            <h2>Current Stock</h2>
+            <p>{product.quantity}</p>
 
-  )
+            <h2>Seller</h2>
+            <p>{product.seller}</p>
+          </Col>
+
+          <Col md={3}>
+            {product &&
+
+            <Button size="lg" onClick={
+              () => {
+                HandleAddToCart(productId);
+              } 
+            }
+            disabled={product.quantity === '0'}
+            >Add to Cart</Button> 
+
+            }
+          </Col>
+        </Row>
+
+      </div>
+
+    )
+  }
 }
   
 export default ProductScreen;

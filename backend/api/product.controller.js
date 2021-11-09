@@ -88,6 +88,11 @@ export default class ProductController {
 
             let product = await ProductDAO.findProductById(productId)
 
+            //return the username of the seller with the product
+            let adminId = ObjectId(product.adminId)
+            let admin = await UserAuthenticationDAO.checkAdminForId(adminId)
+            product.seller = admin.username;
+
             if (product) {
                     res.json(product)
             } else {

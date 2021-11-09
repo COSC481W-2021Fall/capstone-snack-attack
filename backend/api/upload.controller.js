@@ -43,11 +43,12 @@ const upload = multer({
 router.post("/product/add/image", upload.single("image"), (req, res) => {
     const filePath = req.file.path;
 
-    let newFilePath = `uploads/item_${req.body.title}_adminID_${req.body.adminId}.jpg`;
+    let dbFilePath = `uploads/item_${req.body.title}_adminID_${req.body.adminId}.jpg`;
+    let newFilePath = '../frontend/public/' + dbFilePath;
 
     fs.renameSync(filePath, newFilePath); // change the file name
 
-    res.send(`/${newFilePath}`);
+    res.send(`/${dbFilePath}`);
 });
 
 export default router;
