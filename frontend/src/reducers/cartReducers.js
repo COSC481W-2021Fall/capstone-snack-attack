@@ -1,4 +1,4 @@
-import { ADD_CART_ITEM } from "../constants/cartConstants";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, CHANGE_CART_ITEM_QTY } from "../constants/cartConstants";
 
 export const cartReducer = (
     state = {cartItems: []}, action
@@ -28,7 +28,32 @@ export const cartReducer = (
                 };
             }
 
+        case REMOVE_CART_ITEM:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(
+                    (x) => x._id !== action.payload
+                ),
+            };
 
+        
+        case  CHANGE_CART_ITEM_QTY:
+
+            const changeQtyItem = state.cartItems.find(
+                (iteratedItem) => iteratedItem._id === action.payload.productId
+            );
+
+            changeQtyItem.qty = action.payload.qty
+
+
+            return {
+                ...state,
+                cartItems: state.cartItems.map((iteratedItem) =>
+                    iteratedItem._id === action.payload.productId
+                        ? changeQtyItem : iteratedItem
+                ),
+
+            }   
 
         default:
             return state;
