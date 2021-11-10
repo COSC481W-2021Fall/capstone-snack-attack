@@ -50,7 +50,7 @@ export default class SignupDAO {
 
     static async findProducts(pageNumber) {
         try {
-            const pageSize = 10
+            const pageSize = 25
 
             let count = await products.countDocuments({})
             let selectedProducts = await products.find({}).limit(pageSize).skip(pageSize * (pageNumber - 1)).toArray()

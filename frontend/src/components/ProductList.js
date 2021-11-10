@@ -30,9 +30,9 @@ const ProductsList = props => {
                             <div className="card">
                             <a href={"/product/" + product._id}>
                                 <div className="card-body">
-                                    <h5 className="card-title">{product.title}</h5>
+                                    <h4 className="card-title">{product.title}</h4>
                                     <p className="card-text">
-                                        <strong>price: </strong>{product.price}<br />
+                                        Price: ${product.price}<br />
                                         <Image src={product.image} alt={product.title} fluid></Image>
                                     </p>
                                 </div>

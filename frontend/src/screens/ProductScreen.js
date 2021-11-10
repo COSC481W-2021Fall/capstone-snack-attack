@@ -64,7 +64,8 @@ function ProductScreen () {
             <p>{product.category}</p>
 
             <h2>Current Stock</h2>
-            <p>{product.quantity}</p>
+            <p hidden={product.quantity > 0}>Out of Stock!</p>
+            <p hidden={product.quantity < 1}>{product.quantity}</p>
 
             <h2>Seller</h2>
             <p>{product.seller}</p>
