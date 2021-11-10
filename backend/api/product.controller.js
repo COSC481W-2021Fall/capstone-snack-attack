@@ -102,4 +102,19 @@ export default class ProductController {
             res.status(500).json({error: e.message})
         }   
     }
+
+    static async getProducts(req, res, next) {
+        try {
+            let pageNumber = Number(req.params.pageNumber) || 1;
+            let selectedProducts = await ProductDAO.findProducts(pageNumber)
+
+            if (selectedProducts) {
+                res.json(selectedProducts)
+            } else {
+                res.status(404).send({message: 'Unable to fetch any products'})
+            }
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
+    }
 }

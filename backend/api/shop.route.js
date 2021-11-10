@@ -9,7 +9,7 @@ const router = express.Router();
 router.route("/signup/isunique").post(SignupController.userUnique);
 router.route("/signup").post(SignupController.Signup);
 router.route("/login").post(LoginController.verifyLogin)
-
+router.route("/products/:pageNumber").get(ProductController.getProducts)
 
 router.route("/product/add").post(ProductController.verifyAddProduct);
 
