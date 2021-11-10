@@ -1,4 +1,6 @@
-import { ADD_CART_ITEM, CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstants";
+
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, CHANGE_CART_ITEM_QTY,CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstants";
+
 
 export const cartReducer = (state = { cartItems: [] }, action) => {
   switch (action.type) {
@@ -11,25 +13,57 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 
       //console.log(existedItem)
 
-      if (existedItem) {
-        return {
-          ...state,
-          cartItems: state.cartItems.map((iteratedItem) =>
-            iteratedItem._id === existedItem._id ? itemFromPayload : iteratedItem
-          ),
-        };
-      } else {
-        return {
-          ...state,
-          cartItems: [...state.cartItems, itemFromPayload],
-        };
-      }
-    case CART_SAVE_SHIPPING_ADDRESS:
-      return {
-        ...state,
-        shippingAddress: action.payload,
-      };
-    default:
-      return state;
-  }
+
+            if (existedItem){
+                return {
+                    ...state,
+                    cartItems: state.cartItems.map((iteratedItem) =>
+                        iteratedItem._id === existedItem._id
+                            ? itemFromPayload : iteratedItem
+                    ),
+                };
+            } else {
+                return {
+                    ...state,
+                    cartItems: [...state.cartItems, itemFromPayload],
+                };
+            }
+
+        case REMOVE_CART_ITEM:
+            return {
+                ...state,
+                cartItems: state.cartItems.filter(
+                    (x) => x._id !== action.payload
+                ),
+            };
+
+        
+        case  CHANGE_CART_ITEM_QTY:
+
+            const changeQtyItem = state.cartItems.find(
+                (iteratedItem) => iteratedItem._id === action.payload.productId
+            );
+
+            changeQtyItem.qty = action.payload.qty
+
+
+            return {
+                ...state,
+                cartItems: state.cartItems.map((iteratedItem) =>
+                    iteratedItem._id === action.payload.productId
+                        ? changeQtyItem : iteratedItem
+                ),
+
+            };
+
+        case CART_SAVE_SHIPPING_ADDRESS:
+            return {
+              ...state,
+              shippingAddress: action.payload,
+            };
+
+        default:
+            return state;
+    }
 };
+
