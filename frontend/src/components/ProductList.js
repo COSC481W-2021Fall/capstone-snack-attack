@@ -26,7 +26,7 @@ const ProductsList = props => {
       <div className="row">
                 {products.map((product) => {
                     return (
-                        <div className="col-lg-4 pb-1">
+                        <div key={product.title} className="col-lg-4 pb-1">
                             <div className="card">
                             <a href={"/product/" + product._id}>
                                 <div className="card-body">
