@@ -36,7 +36,11 @@ function ProductScreen () {
 
 
   const HandleAddToCart = (productId) => {
-    dispatch(addCartItem(productId));
+    if (product.quantity < 1) {
+      window.alert("Out of Stock!\nYou cannot add this item to your cart.")
+    } else {
+      dispatch(addCartItem(productId));
+    }
   }
   
 
@@ -79,7 +83,6 @@ function ProductScreen () {
                 HandleAddToCart(productId);
               } 
             }
-            disabled={product.quantity === '0'}
             >Add to Cart</Button> 
 
             }
