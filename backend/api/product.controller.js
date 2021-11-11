@@ -88,6 +88,11 @@ export default class ProductController {
 
             let product = await ProductDAO.findProductById(productId)
 
+            //return the username of the seller with the product
+            let adminId = ObjectId(product.adminId)
+            let admin = await UserAuthenticationDAO.checkAdminForId(adminId)
+            product.seller = admin.username;
+
             if (product) {
                     res.json(product)
             } else {
@@ -96,5 +101,20 @@ export default class ProductController {
         } catch (e) {
             res.status(500).json({error: e.message})
         }   
+    }
+
+    static async getProducts(req, res, next) {
+        try {
+            let pageNumber = Number(req.params.pageNumber) || 1;
+            let selectedProducts = await ProductDAO.findProducts(pageNumber)
+
+            if (selectedProducts) {
+                res.json(selectedProducts)
+            } else {
+                res.status(404).send({message: 'Unable to fetch any products'})
+            }
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
     }
 }

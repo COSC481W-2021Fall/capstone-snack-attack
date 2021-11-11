@@ -8,7 +8,7 @@ function CheckInfo ({userInfo}){
 
   return <h1>Didn't get info</h1>
 } */
-
+import ProductsList from "../components/ProductList";
 
 export default function HomeScreen () {
 
@@ -17,14 +17,12 @@ export default function HomeScreen () {
 
 
   console.log(userInfo); */
-  // console.log(userInfo.username);
-
-
-   
+  // console.log(userInfo.username);   
   return (
 
     <div>
-      This is home screen.
+      
+      <ProductsList/>
      {/* {< CheckInfo userInfo={userInfo} />}      */}
  
     </div>
