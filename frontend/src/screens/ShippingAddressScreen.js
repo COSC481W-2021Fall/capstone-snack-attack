@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Form, Button, Alert } from "react-bootstrap";
+import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../services/cartAction";
+import store from "../store";
 
 const ShippingAddressScreen = ({ history }) => {
   //
@@ -33,7 +34,9 @@ const ShippingAddressScreen = ({ history }) => {
     if (validateInput(name) && validateInput(state) && validateInput(city)) {
       console.log("pass");
 
-      // dispatch(saveShippingAddress({ name, address, city, state, zipcode }));
+      dispatch(saveShippingAddress({ name, address, city, state, zipcode }));
+      console.log(shippingAddress);
+
       //history.push("/payment");
     } else {
       alert("Invalid Input, please check and try again!");

@@ -87,7 +87,6 @@ export default function CartScreen() {
         }
 
         <Button
-          disabled={cartItems.length === 0}
           onClick={() => {
             history.push("/shippingaddress");
           }}
