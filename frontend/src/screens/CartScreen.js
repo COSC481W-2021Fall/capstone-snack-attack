@@ -22,6 +22,9 @@ export default function CartScreen () {
     dispatch(changeCartItemQty(id, qty));
   }
 
+  const totalPrice = cartItems.reduce(
+    (price, item) => price + item.qty *item.price, 0);
+
 
 
   if(cartItems.length === 0){
@@ -44,11 +47,11 @@ export default function CartScreen () {
                     <Image src={item.image} alt={item.title} fluid rounded /> 
                 </Col>
 
-                <Col md={3}>
+                <Col md={2}>
                     <Link to={`/product/${item._id}`} >{item.title}</Link> 
                 </Col>
 
-                <Col md={2}>
+                <Col md={1}>
                   ${item.price} 
                 </Col>
 
@@ -75,6 +78,10 @@ export default function CartScreen () {
                     }
                     disabled={item.qty == item.inStock}
                   >+</Button>                  
+                </Col>
+
+                <Col md={2}>
+                  Total Price: ${totalPrice} 
                 </Col>
 
                 <Col md={2}>
