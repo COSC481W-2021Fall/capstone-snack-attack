@@ -1,5 +1,5 @@
 import productActions from "./productAction";
-import { ADD_CART_ITEM, REMOVE_CART_ITEM, CHANGE_CART_ITEM_QTY } from "../constants/cartConstants";  
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, CHANGE_CART_ITEM_QTY, CART_SAVE_SHIPPING_ADDRESS  } from "../constants/cartConstants";  
 
 
 export const addCartItem = (productId) => async (dispatch, getState) => {
@@ -50,4 +50,13 @@ export const changeCartItemQty = (productId,qty) => async (dispatch, getState) =
     localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
       
 } 
+
+export const saveShippingAddress = (data) => (dispatch) => {
+  dispatch({
+    type: CART_SAVE_SHIPPING_ADDRESS,
+    payload: data,
+  });
+
+  localStorage.setItem("shippingAddress", JSON.stringify(data));
+};
 

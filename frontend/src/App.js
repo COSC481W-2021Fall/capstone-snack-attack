@@ -18,6 +18,9 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 // import Footer from "./components/Footer";
 
 import ProductScreen from "./screens/ProductScreen";
+import ShippingAddressScreen from "./screens/ShippingAddressScreen";
+import PaymentScreen from "./screens/PaymentScreen";
+
 // import CartScreen from "./screens/CartScreen";
 // import ProfileScreen from "./screens/ProfileScreen";
 // import ShippingScreen from "./screens/ShippingScreen";
@@ -29,8 +32,6 @@ import ProductScreen from "./screens/ProductScreen";
 // import OrderListScreen from "./screens/OrderListScreen";
 
 const App = () => {
-
-
   return (
     <BrowserRouter>
       <div className="grid-container">
@@ -46,6 +47,8 @@ const App = () => {
               <Route exact path="/cart" component={CartScreen} />
               <Route path="/addproduct" component={ProductAddScreen} />
               <Route path="/product/:productId" component={ProductScreen} />
+              <Route path="/shippingaddress" component={ShippingAddressScreen} />
+              <Route path="/payment" component={PaymentScreen} />
             </Switch>
           </Container>
         </main>
@@ -55,4 +58,3 @@ const App = () => {
 };
 
 export default App;
-
