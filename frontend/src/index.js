@@ -5,7 +5,6 @@ import App from "./App";
 import "./bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./store";
-import * as serviceWorker from "./serviceWorker";
 
 ReactDOM.render(
   <Provider store={store}>
@@ -13,4 +12,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-serviceWorker.unregister();
