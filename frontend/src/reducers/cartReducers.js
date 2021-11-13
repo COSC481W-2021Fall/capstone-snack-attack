@@ -1,8 +1,11 @@
+import {
+  ADD_CART_ITEM,
+  REMOVE_CART_ITEM,
+  CHANGE_CART_ITEM_QTY,
+  CART_SAVE_SHIPPING_ADDRESS,
+} from "../constants/cartConstants";
 
-import { ADD_CART_ITEM, REMOVE_CART_ITEM, CHANGE_CART_ITEM_QTY,CART_SAVE_SHIPPING_ADDRESS } from "../constants/cartConstants";
-
-
-export const cartReducer = (state = { cartItems: [] }, action) => {
+export const cartReducer = (state = { cartItems: [], shippingAddress: {} }, action) => {
   switch (action.type) {
     case ADD_CART_ITEM:
       const itemFromPayload = action.payload;
@@ -13,57 +16,47 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
 
       //console.log(existedItem)
 
+      if (existedItem) {
+        return {
+          ...state,
+          cartItems: state.cartItems.map((iteratedItem) =>
+            iteratedItem._id === existedItem._id ? itemFromPayload : iteratedItem
+          ),
+        };
+      } else {
+        return {
+          ...state,
+          cartItems: [...state.cartItems, itemFromPayload],
+        };
+      }
 
-            if (existedItem){
-                return {
-                    ...state,
-                    cartItems: state.cartItems.map((iteratedItem) =>
-                        iteratedItem._id === existedItem._id
-                            ? itemFromPayload : iteratedItem
-                    ),
-                };
-            } else {
-                return {
-                    ...state,
-                    cartItems: [...state.cartItems, itemFromPayload],
-                };
-            }
+    case REMOVE_CART_ITEM:
+      return {
+        ...state,
+        cartItems: state.cartItems.filter((x) => x._id !== action.payload),
+      };
 
-        case REMOVE_CART_ITEM:
-            return {
-                ...state,
-                cartItems: state.cartItems.filter(
-                    (x) => x._id !== action.payload
-                ),
-            };
+    case CHANGE_CART_ITEM_QTY:
+      const changeQtyItem = state.cartItems.find(
+        (iteratedItem) => iteratedItem._id === action.payload.productId
+      );
 
-        
-        case  CHANGE_CART_ITEM_QTY:
+      changeQtyItem.qty = action.payload.qty;
 
-            const changeQtyItem = state.cartItems.find(
-                (iteratedItem) => iteratedItem._id === action.payload.productId
-            );
+      return {
+        ...state,
+        cartItems: state.cartItems.map((iteratedItem) =>
+          iteratedItem._id === action.payload.productId ? changeQtyItem : iteratedItem
+        ),
+      };
 
-            changeQtyItem.qty = action.payload.qty
+    case CART_SAVE_SHIPPING_ADDRESS:
+      return {
+        ...state,
+        shippingAddress: action.payload,
+      };
 
-
-            return {
-                ...state,
-                cartItems: state.cartItems.map((iteratedItem) =>
-                    iteratedItem._id === action.payload.productId
-                        ? changeQtyItem : iteratedItem
-                ),
-
-            };
-
-        case CART_SAVE_SHIPPING_ADDRESS:
-            return {
-              ...state,
-              shippingAddress: action.payload,
-            };
-
-        default:
-            return state;
-    }
+    default:
+      return state;
+  }
 };
-
