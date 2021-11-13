@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+
 import FormContainer from "../components/FormContainer";
 import { saveShippingAddress } from "../services/cartAction";
-import store from "../store";
 
-const ShippingAddressScreen = ({ history }) => {
+const ShippingAddressScreen = () => {
   //
   // pull put data from Store (state.cart)
   const cart = useSelector((state) => state.cart);
   const { shippingAddress } = cart;
+
+  console.log(shippingAddress);
 
   //state for data updated by form onChange actions
   const [name, setName] = useState(shippingAddress.name);
@@ -20,6 +23,7 @@ const ShippingAddressScreen = ({ history }) => {
 
   //
   const dispatch = useDispatch();
+  const history = useHistory();
 
   function validateInput(str) {
     var validateInput = true;
@@ -32,14 +36,15 @@ const ShippingAddressScreen = ({ history }) => {
     e.preventDefault();
 
     if (validateInput(name) && validateInput(state) && validateInput(city)) {
-      console.log("pass");
+      // console.log("pass");
 
       dispatch(saveShippingAddress({ name, address, city, state, zipcode }));
-      console.log(shippingAddress);
+      // console.log(shippingAddress);
+      // console.log(cart);
 
-      //history.push("/payment");
+      history.push("/payment");
     } else {
-      alert("Invalid Input, please check and try again!");
+      alert("Invalid Input. Names, City and State do not allow numbers and special symbols!");
     }
   };
 
@@ -55,8 +60,8 @@ const ShippingAddressScreen = ({ history }) => {
             placeholder="Enter name"
             //
             // initial value from useState
-            value={name}
             required
+            value={name}
             onChange={(e) => setName(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -68,8 +73,8 @@ const ShippingAddressScreen = ({ history }) => {
             placeholder="Enter address"
             //
             // initial value from useState
-            value={address}
             required
+            value={address}
             onChange={(e) => setAddress(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -81,8 +86,8 @@ const ShippingAddressScreen = ({ history }) => {
             placeholder="Enter city"
             //
             // initial value from useState
-            value={city}
             required
+            value={city}
             onChange={(e) => setCity(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -94,8 +99,8 @@ const ShippingAddressScreen = ({ history }) => {
             placeholder="Enter state"
             //
             // initial value from useState
-            value={state}
             required
+            value={state}
             onChange={(e) => setState(e.target.value)}
           ></Form.Control>
         </Form.Group>
@@ -107,8 +112,8 @@ const ShippingAddressScreen = ({ history }) => {
             placeholder="Enter zipcode"
             //
             // initial value from useState
-            value={zipcode}
             required
+            value={zipcode}
             onChange={(e) => setZipcode(e.target.value)}
           ></Form.Control>
         </Form.Group>
