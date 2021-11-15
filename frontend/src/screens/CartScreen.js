@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { Row, Col, ListGroup, Image, Button } from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { removeFromCart, changeCartItemQty } from "../services/cartAction";
@@ -23,7 +23,9 @@ export default function CartScreen() {
     dispatch(changeCartItemQty(id, qty));
   };
 
-  const totalPrice = cartItems.reduce((price, item) => price + item.qty * item.price, 0);
+  const totalPrice = (Math.round(
+    (cartItems.reduce((price, item) => price + item.qty * item.price, 0) + Number.EPSILON
+  ) * 100) / 100 ).toFixed(2);
 
   if (cartItems.length === 0) {
     return <div> Your shopping cart is empty. </div>;
@@ -31,8 +33,8 @@ export default function CartScreen() {
 
   return (
     <Row>
-      <Col md={12}>
-        <h3>Shopping Cart</h3>
+      <Col md={10}>
+        <h3>Shopping Cart</h3> 
 
         {
           <ListGroup variant="flush">
@@ -73,7 +75,7 @@ export default function CartScreen() {
                     </Button>
                   </Col>
 
-                  <Col md={2}>Total Price: ${totalPrice}</Col>
+                  
 
                   <Col md={2}>
                     <Button
@@ -90,14 +92,32 @@ export default function CartScreen() {
           </ListGroup>
         }
 
-        <Button
-          onClick={() => {
-            history.push("/shippingaddress");
-          }}
-        >
-          Proceed to checkout
-        </Button>
+
       </Col>
+
+      <Col md={2}>
+        <Card>
+          <ListGroup variant="flush">
+            <ListGroup.Item>
+
+              Total Price: ${totalPrice}
+            </ListGroup.Item>
+
+            <ListGroup.Item>  
+
+              <Button
+                onClick={() => {
+                  history.push("/shippingaddress");
+                }}
+              >
+                Proceed to checkout
+              </Button>
+
+            </ListGroup.Item>
+          </ListGroup>
+        </Card> 
+      </Col>
+
     </Row>
   );
 }
