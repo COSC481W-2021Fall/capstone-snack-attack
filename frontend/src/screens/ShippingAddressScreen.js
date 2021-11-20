@@ -42,7 +42,7 @@ const ShippingAddressScreen = () => {
       // console.log(shippingAddress);
       // console.log(cart);
 
-      history.push("/payment");
+      history.push("/placeorder");
     } else {
       alert("Invalid Input. Names, City and State do not allow numbers and special symbols!");
     }
