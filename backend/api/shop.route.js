@@ -2,6 +2,7 @@ import express from "express";
 import SignupController from "./signup.controller.js";
 import LoginController from "./login.controller.js"
 import ProductController from "./product.controller.js";
+import OrderController from "./order.controller.js";
 
 const router = express.Router();
 
@@ -14,6 +15,8 @@ router.route("/products/:pageNumber").get(ProductController.getProducts)
 router.route("/product/add").post(ProductController.verifyAddProduct);
 
 router.route("/product/:id").get(ProductController.getProductById);
+
+router.route("/placeorder").post(OrderController.placeOrder);
 
 
 export default router;
