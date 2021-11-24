@@ -18,6 +18,10 @@ class UserActions {
         return http.post("/product/add", data);
     }
 
+    getCustomerOrders(customerId) {
+        return http.get("/customerOrders/" + customerId);
+    }
+
 }
 
 export default new UserActions();

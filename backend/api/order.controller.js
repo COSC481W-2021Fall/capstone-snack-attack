@@ -63,8 +63,22 @@ export default class OrderController {
 
     }
 
+    static async getCustomerOrders(req, res, next) {
+        try {
+            let customer = req.params.customerId
+            let orders = await OrderDAO.findCustomerOrders(customer)
 
+            if (orders) {
+                res.json(orders)
+            } else {
+                res.status(404).send({message: 'Unable to fetch any orders for this customer.'})
+            }
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
+    }
 
-
-
+    static async getStoreOrders(req, res, next) {
+        
+    }
 }
