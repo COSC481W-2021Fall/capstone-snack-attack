@@ -7,6 +7,10 @@ class CheckoutActions {
         return http.post("/charge", data);
     }
 
+    placeorder(data) {
+        return http.post("/placeorder", data);
+    }
+
 
 }
 
