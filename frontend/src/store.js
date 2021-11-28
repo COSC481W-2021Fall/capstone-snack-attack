@@ -18,6 +18,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
   } from "./reducers/productReducers";  */
 
 import { cartReducer } from "./reducers/cartReducers";
+import { myOrdersReducers } from "./reducers/orderReducers";
 
 import { userLoginReducer } from "./reducers/userReducers";
 
@@ -41,7 +42,7 @@ const combinedReducers = combineReducers({
   //
   cart: cartReducer, // matches the property name 'cart' in initialState
   userLogin: userLoginReducer, // matches the property name 'userLogin' in initialState
-
+  myOrders: myOrdersReducers,
   /*     orderCreate: orderCreateReducer,
     orderDetails: orderDetailsReducer,
     orderPay: orderPayReducer,
