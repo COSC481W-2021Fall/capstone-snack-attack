@@ -22,6 +22,10 @@ class UserActions {
         return http.get("/customerOrders/" + customerId);
     }
 
+    getStoreOrders(adminId) {
+        return http.get("/storeOrders/" + adminId);
+    }
+
 }
 
 export default new UserActions();

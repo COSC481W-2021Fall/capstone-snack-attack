@@ -79,6 +79,31 @@ export default class OrderController {
     }
 
     static async getStoreOrders(req, res, next) {
-        
+        try {
+            let admin = req.params.adminId
+            let orders = await OrderDAO.findStoreOrders(admin)
+
+            if (orders) {
+                //go through items in each order and remove those that do not belong to this admin
+                for (let i=0; i<orders.length; i++) {
+                    let order = orders[i]
+                    let allItems = order.items
+                    let storeItems = []
+                    for (let j=0; j<allItems.length; j++) {
+                        let item = allItems[j];
+                        if (item.adminId && item.adminId == admin) {
+                            storeItems.push(item)
+                        }
+                    }
+                    order.items = storeItems
+                }
+                
+                res.json(orders)
+            } else {
+                res.status(404).send({message: 'Unable to fetch any orders for this store.'})
+            }
+        } catch (e) {
+            res.status(500).json({error: e.message})
+        }
     }
 }
