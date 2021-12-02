@@ -1,90 +1,136 @@
-import React, { useEffect, useAlert } from "react";
+import React, { useEffect, useAlert, useState, Fragment } from "react";
 import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import {myOrders} from '../services/orderAction';
-//import UserAction from '../services/userAction';
+import OrderAction from "../services/orderAction";
+import userAction from "../services/userAction";
+import { Link, useHistory } from "react-router-dom";
 
-function OrderListScreen({history}) {
-    
-    const dispatch = useDispatch();
+function OrderListScreen() {
 
-    const { loading, error, orders } = useSelector(state=> state.myOrders);
-    //const orderList = useSelector((state) => state.myOrders)
-    //const { loading, error, orders } = orderList;
-    const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo } = userLogin;
+  const dispatch = useDispatch();
+  const history = useHistory();
+  
+  
+  const userLogin = useSelector((state) => state.userLogin);
+  const { userInfo } = userLogin;
+  const [orders, setOrders] = useState([]);
+  let customerId;
 
-    useEffect(() => {
-      let customerId;
-      if (userInfo && userInfo.userrole === "customer") {
-        customerId = userInfo._id;
-        dispatch(myOrders());
-      }
-    }, [dispatch, history, userInfo]);
-   /* useEffect(() => {
-        dispatch(myOrders());
-    if(error) {
-        alert.error(error);
-        dispatch("this is new error")
-        }
-    }, [dispatch, alert, error]);*/
+  useEffect(() => {
+      retrieveOrders();
+  }, []);
 
-    
+  if(userInfo){
+      customerId = userInfo._id;
+  }
 
-   return (
-    <>
-       <h1>Orders</h1>
+  /*const shippingDetails = shipping && `${shipping.address}, 
+                          ${shipping.city},${shipping.state},
+                           ${shipping.zipcode}`*/
 
-       {loading ? (
-        <h1>Loading...</h1> 
-      ) : (
-        <Table striped bordered hover className="table-sm">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>USER</th>
-              <th>DATE</th>
-              <th>TOTAL</th>
-              <th>PAID</th>
-              <th>DELIVERED</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {orders.map((order) => (
-              <tr key={order._id}>
-                <td>{order._id}</td>
-                <td>{order.username}</td>
-                <td>{order.createdAt.substring(0, 10)}</td>
-                <td>${order.totalPrice}</td>
-                <td>
-                  {order.isPaid ? (
-                    order.paidAt.substring(0, 10)
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  {order.isDelivered ? (
-                    order.deliveredAt.substring(0, 10)
-                  ) : (
-                    <i className="fas fa-times" style={{ color: "red" }}></i>
-                  )}
-                </td>
-                <td>
-                  <LinkContainer to={`/order/${order._id}`}>
-                    <Button variant="light" className="btn-sm">
-                      Details
-                    </Button>
-                  </LinkContainer>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
-    </>
-   )
+  const retrieveOrders = () => {
+      OrderAction.getOrdersByCustomerId(customerId)
+          .then(response => {
+              console.log(response);
+
+              setOrders(response.data);
+
+          })
+          .catch(e => {
+              console.log(e);
+          });
+  };
+
+if (!userInfo || !(userInfo.userrole === 'customer')){
+    return (
+        <div>Please sign in first.</div>
+    )
+} 
+else if (!orders) {
+    return (
+        <div>There are no orders.</div>
+    )
 }
+else {
+    console.log(orders);
+    return (
+         <>
+        <h1>Orders</h1>
+         
+          <Table striped bordered hover className="table-sm">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>USER</th>
+                <th>TOTAL</th>
+                <th>NO. OF ITEMS</th>
+               
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              {orders.map((order) => (
+                <tr key={order._id} >
+                  <td>{order._id}</td>
+                  <td>{order.shipping.name}</td>
+                  <td>${order.amount}</td>
+                  <td>{order.items.length}</td>
+                  
+                  <td>
+                    
+                      <Button href={`#${order._id}`} variant="light" className="btn-sm">
+                        Details
+                      </Button>
+                    
+                  </td>
+                </tr>
+                    ))}
+            </tbody>
+          </Table>
+        <Fragment>
+        {orders.map((order) => (
+            <><h1 className="my-5" id={order._id}> Order # {order._id}</h1>
+              <h4 className="mb-4"> Shipping Info</h4>
+              <p><b>Name: {order.shipping.name}</b></p>
+              <p className="mb-4">
+                <h4>Address:{order.shipping.address},{order.shipping.city}, 
+                          {order.shipping.state} {order.shipping.zipcode}</h4>
+              </p>
+              <p><b>Total price: {order.amount}</b></p>
+
+              <h4 className="mb-4"> Order Items:</h4>
+              <hr/>
+              <div>
+                {order.items.map(
+                   (item) => {
+                    return (
+                      <div className="row my-5">
+                        <div className="col-4 col-lg-2">
+                           <img size="small" src={item.image} alt={item.title} height="45" width="65" />
+                        </div>
+                        <div className="col-5 col-lg-5"><p>{item.title}</p></div>
+                        <div className="col-4 col-lg-2 mt-4 mt-lg-0">
+                          <p>Price: ${item.price}</p>
+                        </div>
+                        <div className="col-4 col-lg-3 mt-4 mt-lg-0">
+                        <p>Quantity: {item.qty}</p>
+                        </div>
+                      </div>
+                      )
+                   }
+                )
+                }
+                
+              </div>
+              
+              
+            </>  
+        ))}
+        </Fragment>
+      </>
+    )
+  }  
+} 
 export default OrderListScreen;
