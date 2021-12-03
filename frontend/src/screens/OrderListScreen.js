@@ -75,7 +75,7 @@ else {
                 <tr key={order._id} >
                   <td>{order._id}</td>
                   <td>{order.shipping.name}</td>
-                  <td>${order.amount}</td>
+                  <td>${(order.amount*0.01).toFixed(2)}</td>
                   <td>{order.items.length}</td>
                   
                   <td>
@@ -95,10 +95,10 @@ else {
               <h4 className="mb-4"> Shipping Info</h4>
               <p><b>Name: {order.shipping.name}</b></p>
               <p className="mb-4">
-                <h4>Address:{order.shipping.address},{order.shipping.city}, 
+                <h4>Address:{order.shipping.address},{order.shipping.city},  
                           {order.shipping.state} {order.shipping.zipcode}</h4>
               </p>
-              <p><b>Total price: {order.amount}</b></p>
+              <p><b>Total price: {(order.amount*0.01).toFixed(2)}</b></p>
 
               <h4 className="mb-4"> Order Items:</h4>
               <hr/>
