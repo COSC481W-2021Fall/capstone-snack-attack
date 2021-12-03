@@ -46,6 +46,9 @@ const Header = () => {
                     <LinkContainer to="/addproduct">
                       <NavDropdown.Item>Add Products</NavDropdown.Item>
                     </LinkContainer>
+                    <LinkContainer to="/storeOrders">
+                      <NavDropdown.Item>View Store's Orders</NavDropdown.Item>
+                    </LinkContainer>
 
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>

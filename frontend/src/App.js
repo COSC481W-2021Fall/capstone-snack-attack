@@ -20,6 +20,7 @@ import ProductAddScreen from "./screens/ProductAddScreen";
 import ProductScreen from "./screens/ProductScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
+import StoreOrdersScreen from "./screens/StoreOrdersScreen";
 
 // import CartScreen from "./screens/CartScreen";
 // import ProfileScreen from "./screens/ProfileScreen";
@@ -49,6 +50,7 @@ const App = () => {
               <Route path="/product/:productId" component={ProductScreen} />
               <Route path="/shippingaddress" component={ShippingAddressScreen} />
               <Route path="/placeorder" component={PlaceOrderScreen} />
+              <Route path="/storeOrders" component={StoreOrdersScreen} />
             </Switch>
           </Container>
         </main>
