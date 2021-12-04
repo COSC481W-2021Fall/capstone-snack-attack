@@ -2,7 +2,6 @@ import React, { useEffect, useAlert, useState, Fragment } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import OrderAction from "../services/orderAction";
-//import userAction from "../services/userAction";
 
 function OrderListScreen() {  
   
@@ -118,6 +117,6 @@ else {
         </Fragment>
       </>
     )
-  }  
+  } 
 } 
 export default OrderListScreen;
