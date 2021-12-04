@@ -101,12 +101,25 @@ function PlaceOrderScreen() {
           <ListGroup.Item>
             <h3>Shipping information</h3>             
             <div>Name: {shippingAddress.name}</div>
+            <div>Address: {shippingAddress.address} </div>
+            <div>City: {shippingAddress.city}</div>
+            <div>State: {shippingAddress.state} </div>
+            <div>Zip Code: {shippingAddress.zipcode}</div>
           </ListGroup.Item>
 
-          <ListGroup.Item>
-            <h3>Order Items</h3> 
-            placeholder for order items
-          </ListGroup.Item>
+          <h3>Order Items</h3>
+          {cartItems.map((item) => (
+            <ListGroup.Item key={item._id}> 
+                  <Row>
+                    <Col md={2}>
+                      <Image src={item.image} alt={item.title} fluid rounded />
+                    </Col>
+                    <Col md={1}>${item.price}</Col>
+                    <Col md={1}>Quantity: {item.qty}</Col>
+                  </Row>
+
+            </ListGroup.Item>
+          ))}
 
           <ListGroup.Item>
             <h3>Payment</h3>            
