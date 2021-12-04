@@ -68,12 +68,12 @@ function StoreOrdersScreen() {
 
                         </td>
                         </tr>
-                            ))}
+                    ))}
                     </tbody>
                 </Table>
                 <Fragment>
                 {orders.map((order) => (
-                    <>
+                    <React.Fragment key={order._id}>
                         <h2 className="my-5" id={order._id}> Order # {order._id}</h2>
 
                         <h4 className="mb-4"> Shipping Info</h4>
@@ -86,7 +86,7 @@ function StoreOrdersScreen() {
                             {order.items.map(
                             (item) => {
                                 return (
-                                <div className="row my-5">
+                                <div key={item._id} className="row my-5">
                                     <div className="col-4 col-lg-2">
                                     <img size="small" src={item.image} alt={item.title} height="45" width="65" />
                                     </div>
@@ -105,7 +105,7 @@ function StoreOrdersScreen() {
                         <h4 className="mb-4">Store Subtotal: ${order.amount}</h4>
                         <br></br>
                         <br></br>
-                    </>  
+                    </React.Fragment>  
                 ))}
                 </Fragment>
             </>
