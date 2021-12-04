@@ -45,6 +45,7 @@ function StoreOrdersScreen() {
                         <th>CUSTOMER</th>
                         <th>STORE SUBTOTAL</th>
                         <th>NO. OF ITEMS</th>
+                        <th>STRIPE PAYMENT ID</th>
 
                         <th></th>
                     </tr>
@@ -57,6 +58,7 @@ function StoreOrdersScreen() {
                         <td>{order.shipping.name}</td>
                         <td>${order.amount}</td>
                         <td>{order.items.length}</td>
+                        <td>{order.payment.stripe.payment_method_id}</td>
 
                         <td>
 
