@@ -34,21 +34,6 @@ function StoreOrdersScreen() {
     else {
         console.log(orders);
 
-        //cannot use the total listed in order, because it includes cost of items from other stores
-        //so recalculate the total for this store's portion of the order
-        for (let i=0; i<orders.length; i++) {
-            let orderAmount = 0;
-            for (let j=0; j<orders[i].items.length; j++) {
-                let itemCost = parseFloat(orders[i].items[j].price);
-                let itemQty = parseFloat(orders[i].items[j].qty);
-                let totalItemCost = itemCost * itemQty;
-                orders[i].items[j].price = itemCost.toFixed(2); //format item price to be $x.xx in case it's not already
-                orderAmount += totalItemCost;
-            }
-            orders[i].amount = orderAmount.toFixed(2);
-        }
-
-
         return (
             <>
                 <h1>Orders</h1>

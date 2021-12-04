@@ -83,19 +83,26 @@ export default class OrderController {
             let admin = req.params.adminId
             let orders = await OrderDAO.findStoreOrders(admin)
 
+            //go through items in each order and remove those that do not belong to this admin
+            //cannot use the total listed in order, because it includes cost of items from other stores
+            //so recalculate the total for this store's portion of the order
             if (orders) {
-                //go through items in each order and remove those that do not belong to this admin
                 for (let i=0; i<orders.length; i++) {
-                    let order = orders[i]
-                    let allItems = order.items
+                    let orderAmount = 0
                     let storeItems = []
-                    for (let j=0; j<allItems.length; j++) {
-                        let item = allItems[j];
+                    for (let j=0; j<orders[i].items.length; j++) {
+                        let item = orders[i].items[j]
                         if (item.adminId && item.adminId == admin) {
                             storeItems.push(item)
+                            let itemCost = parseFloat(item.price)
+                            let itemQty = parseFloat(item.qty)
+                            let totalItemCost = itemCost * itemQty
+                            item.price = itemCost.toFixed(2) //format item price to be $x.xx in case it's not already
+                            orderAmount += totalItemCost
                         }
                     }
-                    order.items = storeItems
+                    orders[i].items = storeItems
+                    orders[i].amount = orderAmount.toFixed(2)
                 }
                 
                 res.json(orders)
