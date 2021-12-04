@@ -10,7 +10,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import Header from "./components/header/header";
 
 import CartScreen from "./screens/CartScreen";
-// import ProductEditScreen from "./screens/ProductEditScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
 import ProductAddScreen from "./screens/ProductAddScreen";
 
 // import ProductListScreen from "./screens/ProductListScreen";
@@ -50,7 +50,8 @@ const App = () => {
               <Route path="/product/:productId" component={ProductScreen} />
               <Route path="/shippingaddress" component={ShippingAddressScreen} />
               <Route path="/placeorder" component={PlaceOrderScreen} />
-              <Route path="/admin/productList/:adminId" component={AdminProductListScreen} />
+              <Route path="/admin/productList/:adminId/" component={AdminProductListScreen} />
+              <Route path="/admin/product/:productId/edit" component={ProductEditScreen} />
             </Switch>
           </Container>
         </main>

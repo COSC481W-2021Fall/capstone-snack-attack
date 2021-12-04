@@ -44,7 +44,7 @@ function ProductScreen () {
   }
   
 
-  if (loading == true) {
+  if (loading === true) {
     return (
       <h1>LOADING</h1>
     )

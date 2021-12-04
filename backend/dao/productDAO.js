@@ -76,4 +76,15 @@ export default class SignupDAO {
       return { error: e };
     }
   }
+
+  static async updateProduct(productId, data) {
+    const _id = new ObjectId(productId);
+    try {
+      const updateResult = await products.updateOne({ _id: _id }, { $set: data });
+      return updateResult;
+    } catch (e) {
+      console.error(e);
+      return { error: e };
+    }
+  }
 }

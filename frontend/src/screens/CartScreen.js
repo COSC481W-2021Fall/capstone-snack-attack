@@ -69,7 +69,7 @@ export default function CartScreen() {
                       onClick={() => {
                         HandleChangeItemQty(item._id, item.qty + 1);
                       }}
-                      disabled={item.qty == item.inStock}
+                      disabled={item.qty === item.inStock}
                     >
                       +
                     </Button>

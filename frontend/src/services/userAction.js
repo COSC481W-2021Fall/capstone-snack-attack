@@ -20,6 +20,10 @@ class UserActions {
   getAdminProductList(adminId) {
     return http.get("/admin/productList/" + adminId);
   }
+
+  updateProduct(productId, data) {
+    return http.post("/admin/product/" + productId + "/edit", data);
+  }
 }
 
 export default new UserActions();

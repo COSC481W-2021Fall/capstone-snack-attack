@@ -80,8 +80,6 @@ export default class ProductController {
     try {
       const productId = req.params.id;
 
-      console.log(productId);
-
       let product = await ProductDAO.findProductById(productId);
 
       //return the username of the seller with the product
@@ -123,6 +121,32 @@ export default class ProductController {
         res.json(adminProducts);
       } else {
         res.status(404).send({ message: "Product not found" });
+      }
+    } catch (e) {
+      res.status(500).json({ error: e.message });
+    }
+  }
+
+  static async updateProductByProductId(req, res, next) {
+    try {
+      const { title, price, description, quantity, category } = req.body;
+      const productId = req.params.productId;
+
+      const updateInfo = {
+        title: title,
+        price: price,
+        description: description,
+        quantity: quantity,
+        category: category,
+      };
+
+      const update = await ProductDAO.updateProduct(productId, updateInfo);
+
+      if (update) {
+        res.json(update);
+      } else {
+        res.status(404);
+        throw new Error("Product not found");
       }
     } catch (e) {
       res.status(500).json({ error: e.message });

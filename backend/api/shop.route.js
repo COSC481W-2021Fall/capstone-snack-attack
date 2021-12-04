@@ -14,5 +14,6 @@ router.route("/product/add").post(ProductController.verifyAddProduct);
 
 router.route("/product/:id").get(ProductController.getProductById);
 router.route("/admin/productList/:adminId").get(ProductController.getProductByAdminId);
+router.route("/admin/product/:productId/edit").post(ProductController.updateProductByProductId);
 
 export default router;
