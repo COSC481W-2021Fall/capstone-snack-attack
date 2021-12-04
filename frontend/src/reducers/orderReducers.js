@@ -24,7 +24,7 @@ export const myOrdersReducers =(state ={orders:[]}, action) => {
                 loading: false,
                 errors: action.payload
             }
-        
+
         default:
             return state;
     }

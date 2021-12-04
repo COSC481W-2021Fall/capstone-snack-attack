@@ -1,16 +1,10 @@
 import React, { useEffect, useAlert, useState, Fragment } from "react";
-import { LinkContainer } from "react-router-bootstrap";
 import { Table, Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import OrderAction from "../services/orderAction";
-import userAction from "../services/userAction";
-import { Link, useHistory } from "react-router-dom";
+//import userAction from "../services/userAction";
 
-function OrderListScreen() {
-
-  const dispatch = useDispatch();
-  const history = useHistory();
-  
+function OrderListScreen() {  
   
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
@@ -25,18 +19,12 @@ function OrderListScreen() {
       customerId = userInfo._id;
   }
 
-  /*const shippingDetails = shipping && `${shipping.address}, 
-                          ${shipping.city},${shipping.state},
-                           ${shipping.zipcode}`*/
-
   const retrieveOrders = () => {
       OrderAction.getOrdersByCustomerId(customerId)
           .then(response => {
               console.log(response);
-
-              setOrders(response.data);
-
-          })
+              setOrders(response.data)
+            })
           .catch(e => {
               console.log(e);
           });
@@ -65,7 +53,6 @@ else {
                 <th>USER</th>
                 <th>TOTAL</th>
                 <th>NO. OF ITEMS</th>
-               
                 <th></th>
               </tr>
             </thead>
