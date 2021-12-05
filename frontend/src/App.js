@@ -10,7 +10,7 @@ import RegisterScreen from "./screens/RegisterScreen";
 import Header from "./components/header/header";
 
 import CartScreen from "./screens/CartScreen";
-// import ProductEditScreen from "./screens/ProductEditScreen";
+import ProductEditScreen from "./screens/ProductEditScreen";
 import ProductAddScreen from "./screens/ProductAddScreen";
 
 // import ProductListScreen from "./screens/ProductListScreen";
@@ -21,6 +21,7 @@ import ProductScreen from "./screens/ProductScreen";
 import ShippingAddressScreen from "./screens/ShippingAddressScreen";
 import PlaceOrderScreen from "./screens/PlaceOrderScreen";
 import StoreOrdersScreen from "./screens/StoreOrdersScreen";
+import AdminProductListScreen from "./screens/AdminProductListScreen";
 
 // import CartScreen from "./screens/CartScreen";
 // import ProfileScreen from "./screens/ProfileScreen";
@@ -51,6 +52,8 @@ const App = () => {
               <Route path="/shippingaddress" component={ShippingAddressScreen} />
               <Route path="/placeorder" component={PlaceOrderScreen} />
               <Route path="/storeOrders" component={StoreOrdersScreen} />
+              <Route path="/admin/productList/:adminId/" component={AdminProductListScreen} />
+              <Route path="/admin/product/:productId/edit" component={ProductEditScreen} />
             </Switch>
           </Container>
         </main>

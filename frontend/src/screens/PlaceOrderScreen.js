@@ -37,7 +37,7 @@ function PlaceOrderScreen() {
   ) * 100) / 100 ).toFixed(2);
   const shippingPrice = (itemsPrice > 25 ? 0 : 10).toFixed(2); 
   const taxPrice = (Math.round(0.15*itemsPrice*100)/100).toFixed(2);
-  const totalPrice = (Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2);
+  const totalPrice = (Math.round(Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice))).toFixed(2);
 
   console.log(itemsPrice);
   console.log(shippingPrice);
@@ -80,7 +80,8 @@ function PlaceOrderScreen() {
       (response) => { 
         console.log(response); 
       
-        window.localStorage.clear("cart");
+        window.localStorage.removeItem("cartItems");
+        window.localStorage.removeItem("shippingAddress");
         window.location.reload(false);
       }        
     ).catch((e) => { 
