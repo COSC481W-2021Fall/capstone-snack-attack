@@ -24,8 +24,6 @@ const Header = () => {
   };
 
   return (
-
-
     <header>
       <Navbar bg="dark" variant="dark" expand="xl" collapseOnSelect>
         <Container>
@@ -46,12 +44,14 @@ const Header = () => {
                     <LinkContainer to="/addproduct">
                       <NavDropdown.Item>Add Products</NavDropdown.Item>
                     </LinkContainer>
+                    <LinkContainer to={`/admin/productlist/${userInfo._id}`}>
+                      <NavDropdown.Item>Product List</NavDropdown.Item>
+                    </LinkContainer>
 
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Customer" id="admin">
-
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 )
