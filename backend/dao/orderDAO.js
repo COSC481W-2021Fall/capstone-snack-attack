@@ -25,5 +25,23 @@ export default class OrderDAO {
         }
     }
 
+    static async findCustomerOrders(customer) {
+        try {
+            let customerOrders = await orders.find({customer: customer}).toArray()
+            return customerOrders
+        } catch (e) {
+            console.error(e)
+            return { error: e}
+        }
+    }
 
+    static async findStoreOrders(admin) {
+        try {
+            let storeOrders = await orders.find({"items.adminId": admin}).toArray()
+            return storeOrders
+        } catch (e) {
+            console.error(e)
+            return { error: e}
+        }
+    }
 }

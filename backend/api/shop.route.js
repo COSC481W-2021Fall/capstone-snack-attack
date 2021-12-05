@@ -16,6 +16,7 @@ router.route("/product/:id").get(ProductController.getProductById);
 router.route("/admin/productList/:adminId").get(ProductController.getProductByAdminId);
 router.route("/admin/product/:productId/edit").post(ProductController.updateProductByProductId);
 router.route("/placeorder").post(OrderController.placeOrder);
-
+router.route("/customerOrders/:customerId").get(OrderController.getCustomerOrders);
+router.route("/storeOrders/:adminId").get(OrderController.getStoreOrders);
 
 export default router;

@@ -21,6 +21,14 @@ class UserActions {
     return http.get("/admin/productList/" + adminId);
   }
 
+  getCustomerOrders(customerId) {
+      return http.get("/customerOrders/" + customerId);
+  }
+
+  getStoreOrders(adminId) {
+      return http.get("/storeOrders/" + adminId);
+  }
+
   updateProduct(productId, data) {
     return http.post("/admin/product/" + productId + "/edit", data);
   }
