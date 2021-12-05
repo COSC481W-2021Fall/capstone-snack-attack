@@ -37,7 +37,7 @@ function PlaceOrderScreen() {
   ) * 100) / 100 ).toFixed(2);
   const shippingPrice = (itemsPrice > 25 ? 0 : 10).toFixed(2); 
   const taxPrice = (Math.round(0.15*itemsPrice*100)/100).toFixed(2);
-  const totalPrice = (Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice)).toFixed(2);
+  const totalPrice = (Math.round(Number(itemsPrice) + Number(shippingPrice) + Number(taxPrice))).toFixed(2);
 
   console.log(itemsPrice);
   console.log(shippingPrice);
@@ -80,7 +80,8 @@ function PlaceOrderScreen() {
       (response) => { 
         console.log(response); 
       
-        window.localStorage.clear("cart");
+        window.localStorage.removeItem("cartItems");
+        window.localStorage.removeItem("shippingAddress");
         window.location.reload(false);
       }        
     ).catch((e) => { 
@@ -101,12 +102,25 @@ function PlaceOrderScreen() {
           <ListGroup.Item>
             <h3>Shipping information</h3>             
             <div>Name: {shippingAddress.name}</div>
+            <div>Address: {shippingAddress.address} </div>
+            <div>City: {shippingAddress.city}</div>
+            <div>State: {shippingAddress.state} </div>
+            <div>Zip Code: {shippingAddress.zipcode}</div>
           </ListGroup.Item>
 
-          <ListGroup.Item>
-            <h3>Order Items</h3> 
-            placeholder for order items
-          </ListGroup.Item>
+          <h3>Order Items</h3>
+          {cartItems.map((item) => (
+            <ListGroup.Item key={item._id}> 
+                  <Row>
+                    <Col md={2}>
+                      <Image src={item.image} alt={item.title} fluid rounded />
+                    </Col>
+                    <Col md={1}>${item.price}</Col>
+                    <Col md={1}>Quantity: {item.qty}</Col>
+                  </Row>
+
+            </ListGroup.Item>
+          ))}
 
           <ListGroup.Item>
             <h3>Payment</h3>            

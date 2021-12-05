@@ -34,4 +34,14 @@ export default class OrderDAO {
             return { error: e}
         }
     }
+
+    static async findStoreOrders(admin) {
+        try {
+            let storeOrders = await orders.find({"items.adminId": admin}).toArray()
+            return storeOrders
+        } catch (e) {
+            console.error(e)
+            return { error: e}
+        }
+    }
 }
