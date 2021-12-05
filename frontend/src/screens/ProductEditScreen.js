@@ -9,7 +9,10 @@ import { Form, Button } from "react-bootstrap";
 const ProductEditScreen = ({ match, res }) => {
   const userLogin = useSelector((state) => state.userLogin);
   const { userInfo } = userLogin;
-  const adminId = userInfo._id;
+  let adminId;
+  if (userInfo && (userInfo.userrole === 'admin')){ 
+      adminId = userInfo._id;
+  }
 
   const productId = match.params.productId;
 
@@ -22,7 +25,7 @@ const ProductEditScreen = ({ match, res }) => {
   const [CategoryValue, setCategoryValue] = useState();
 
   useEffect(() => {
-    if (productId) {
+    if (productId && adminId) {
       ProductActions.getProductById(productId).then((response) => {
         setProduct(response.data);
         setTitleValue(response.data.title);
@@ -57,72 +60,79 @@ const ProductEditScreen = ({ match, res }) => {
     });
   };
 
-  return (
-    <>
-      <Link to={`/admin/productlist/${adminId}`} className="btn btn-light my-3">
-        Go Back
-      </Link>
-      <FormContainer>
-        <h1>Edit Product</h1>
+  if (!userInfo || !(userInfo.userrole === 'admin')){
+    return (
+        <div>Please sign in as a store manager first.</div>
+    )
+  }
+  else {
+    return (
+      <>
+        <Link to={`/admin/productlist/${adminId}`} className="btn btn-light my-3">
+          Go Back
+        </Link>
+        <FormContainer>
+          <h1>Edit Product</h1>
 
-        <Form onSubmit={onSubmit}>
-          <Form.Group controlId="title">
-            <Form.Label>Title</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter title"
-              defaultValue={product.title}
-              onChange={(e) => setTitleValue(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+          <Form onSubmit={onSubmit}>
+            <Form.Group controlId="title">
+              <Form.Label>Title</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter title"
+                defaultValue={product.title}
+                onChange={(e) => setTitleValue(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId="price">
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter price"
-              defaultValue={product.price}
-              onChange={(e) => setPriceValue(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId="price">
+              <Form.Label>Price</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter price"
+                defaultValue={product.price}
+                onChange={(e) => setPriceValue(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId="quantity">
-            <Form.Label>Count In Stock</Form.Label>
-            <Form.Control
-              type="number"
-              placeholder="Enter quantity"
-              defaultValue={product.quantity}
-              onChange={(e) => setQuantityValue(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId="quantity">
+              <Form.Label>Count In Stock</Form.Label>
+              <Form.Control
+                type="number"
+                placeholder="Enter quantity"
+                defaultValue={product.quantity}
+                onChange={(e) => setQuantityValue(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId="category">
-            <Form.Label>Category</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter category"
-              defaultValue={product.category}
-              onChange={(e) => setCategoryValue(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId="category">
+              <Form.Label>Category</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter category"
+                defaultValue={product.category}
+                onChange={(e) => setCategoryValue(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Form.Group controlId="description">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter description"
-              defaultValue={product.description}
-              onChange={(e) => setDescriptionValue(e.target.value)}
-            ></Form.Control>
-          </Form.Group>
+            <Form.Group controlId="description">
+              <Form.Label>Description</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Enter description"
+                defaultValue={product.description}
+                onChange={(e) => setDescriptionValue(e.target.value)}
+              ></Form.Control>
+            </Form.Group>
 
-          <Button type="submit" variant="primary">
-            Update
-          </Button>
-        </Form>
-      </FormContainer>
-    </>
-  );
+            <Button type="submit" variant="primary">
+              Update
+            </Button>
+          </Form>
+        </FormContainer>
+      </>
+    );
+  }
 };
 
 export default ProductEditScreen;
