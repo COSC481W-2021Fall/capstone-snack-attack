@@ -55,6 +55,11 @@ const Header = () => {
                   </NavDropdown>
                 ) : (
                   <NavDropdown title="Customer" id="admin">
+                    
+                    <LinkContainer to="/orderList">
+                      <NavDropdown.Item>Order History</NavDropdown.Item>
+                    </LinkContainer>
+
                     <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>
                   </NavDropdown>
                 )
